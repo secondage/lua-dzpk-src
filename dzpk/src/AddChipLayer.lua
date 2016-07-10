@@ -104,8 +104,8 @@ function AddChipLayer:showAddChip()
     local textCurBeansNum = imgBK:getChildByName("Text_cur_beans_num")
     textCurBeansNum:setString(string.format("%d", i64_toInt(cc.dataMgr.lobbyUserData.lobbyUser.gameCurrency)))
 
-    self.textLeastBring:setString(string.format("最小买入：%d", betTmpleast))
-    self.textMostBring:setString(string.format("最大买入：%d", betTmpMost))
+    self.textLeastBring:setString(string.format("min buy: %d", betTmpleast))
+    self.textMostBring:setString(string.format("max buy: %d", betTmpMost))
 
     self.fntAddChip:setString(string.format("%d", betTmpleast))
     self.supplyGameCurrency = betTmpleast

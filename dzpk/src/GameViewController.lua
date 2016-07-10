@@ -304,7 +304,7 @@ function GameViewController:initSprite()
 	self:initJiaZhuSlider()
 
 	self.textChipNum = findWidget("Text_table_chip_num"):show()
-	self.textChipNum:setString("池底：0")
+	self.textChipNum:setString("pool: 0")
 
 	self.imgBetFrame = findWidget("Image_dizhu"):hide()
 

@@ -536,7 +536,7 @@ function GameLayer:onSC_POKE_DEAL(event)
 		-- 显示桌子信息
 		----[[
 		app.gameViewController.imgBetFrame:show()
-		app.gameViewController.imgBetFrame:getChildByName("BitmapFontLabel_dizhu_num"):setString(string.format("底注：%d", self.baseBet))
+		app.gameViewController.imgBetFrame:getChildByName("BitmapFontLabel_dizhu_num"):setString(string.format("bet: %d", self.baseBet))
 		--]]
 		-- 显示庄家
 		if _gamePublic:valid_chair(self.bankerChair) then
@@ -608,7 +608,7 @@ function GameLayer:onSC_POKE_OP_NOT(event)
 		app.gameViewController:OnOperCompleted()
 	end
 
-	app.gameViewController.textChipNum:setString(string.format("池底：%d", self.totalBet))
+	app.gameViewController.textChipNum:setString(string.format("pool: %d", self.totalBet))
 
 	-- 绘制动画
 	self.betCount = self.betCount + 1
@@ -763,7 +763,7 @@ function GameLayer:onSC_INIT_DATA(event)
 	-- 显示大小盲注信息
 	----[[
 	app.gameViewController.imgBetFrame:show()
-	app.gameViewController.imgBetFrame:getChildByName("BitmapFontLabel_dizhu_num"):setString(string.format("底注：%d", self.baseBet))
+	app.gameViewController.imgBetFrame:getChildByName("BitmapFontLabel_dizhu_num"):setString(string.format("bet: %d", self.baseBet))
 	--]]
 	-- 设置数据
 	for i = 0, table.nums(data.data) - 1 do
@@ -1615,8 +1615,8 @@ function GameLayer:restartGame()
 		app.pokePlay[i]:InitPoke()
 	end
 
-	app.gameViewController.textChipNum:setString("池底：0")
-	app.gameViewController.selfTotalBet:setString("已押注:0")
+	app.gameViewController.textChipNum:setString("pool: 0")
+	app.gameViewController.selfTotalBet:setString("beted: 0")
 	:hide()
 end
 
