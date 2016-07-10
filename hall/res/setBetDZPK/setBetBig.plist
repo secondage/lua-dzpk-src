@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>setBetDZPK/Resources/10-1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{446,400},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/10-2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{446,448},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/100-1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{598,400},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/100-2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{598,448},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/1000-1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{718,1},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/1000-2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{870,1},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/10w-1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{718,49},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/10w-2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{870,49},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/1w-1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{718,97},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/1w-2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{718,249},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,1},{443,509}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{443,509}</string>
+			</dict>
+			<key>setBetDZPK/Resources/bg_2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{446,1},{397,270}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{397,270}</string>
+			</dict>
+			<key>setBetDZPK/Resources/name.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{814,97},{147,39}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{147,39}</string>
+			</dict>
+			<key>setBetDZPK/Resources/x1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{855,97},{46,49}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{46,49}</string>
+			</dict>
+			<key>setBetDZPK/Resources/x2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{855,148},{46,49}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{46,49}</string>
+			</dict>
+			<key>setBetDZPK/Resources/1000-3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{718,297},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/100-3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{718,345},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/10-3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{750,393},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/10w-3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{750,441},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+			<key>setBetDZPK/Resources/1w-3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{766,97},{150,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{150,46}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>setBetBig.png</string>
+			<key>realTextureFileName</key>
+			<string>setBetBig.png</string>
+			<key>size</key>
+			<string>{1024,512}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>512</integer>
+		</dict>
+	</dict>
+</plist>
