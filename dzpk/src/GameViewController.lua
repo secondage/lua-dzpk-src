@@ -337,7 +337,7 @@ function GameViewController:initSprite()
 
 	self.chatNode = findWidget("Node_chat"):show()
 
-	local btnChat = self.chatNode:getChildByName("Button_chat")
+	local btnChat = self.chatNode:getChildByName("Button_chat"):hide()
 	if cc.dataMgr.isWatcher then
 		btnChat:hide()
 	end
