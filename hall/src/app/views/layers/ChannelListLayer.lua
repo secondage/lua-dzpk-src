@@ -230,7 +230,7 @@ local function createRooms(self, channelProtopyte, data)
 		print("channelRes = " ..channelRes)
 		channelClone:loadTexture(channelRes, 1)
 
-		dump(v)
+		--dump(v)
 		local vr = v.rmInfo
 		print("vr = " ..#vr)
 		--if #vr == 1 then 
