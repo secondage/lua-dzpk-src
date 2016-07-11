@@ -120,7 +120,7 @@ local function procUI(self)
 				app.sceneSwitcher:enterScene("LoginScene")
     		
 			end
-			app.msgBox.showMsgBoxTwoBtn("是否切换账号", onButtonClicked)
+			app.msgBox.showMsgBoxTwoBtn("Change Account?", onButtonClicked)
 		end
 	end)
 
