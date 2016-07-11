@@ -30,17 +30,17 @@ local function initWidgets(self)
     end
 
     local textCurrentPsw = ccui.Helper:seekWidgetByName(root, "TextField_currentPsw")
-    self.textCurrentPsw = app.EditBoxFactory:createEditBoxByImage(textCurrentPsw, "输入当前密码")
+    self.textCurrentPsw = app.EditBoxFactory:createEditBoxByImage(textCurrentPsw, "Current password")
     self.textCurrentPsw:registerScriptEditBoxHandler(clearTips)
     self.textCurrentPsw:setInputFlag(0)
 
     local textNewPsw = ccui.Helper:seekWidgetByName(root, "TextField_newPsw")
-    self.textNewPsw = app.EditBoxFactory:createEditBoxByImage(textNewPsw, "输入新密码")
+    self.textNewPsw = app.EditBoxFactory:createEditBoxByImage(textNewPsw, "New password")
     self.textNewPsw:registerScriptEditBoxHandler(clearTips)
     self.textNewPsw:setInputFlag(0)
 
     local textComfirm = ccui.Helper:seekWidgetByName(root, "TextField_comfirm")
-    self.textComfirm = app.EditBoxFactory:createEditBoxByImage(textComfirm, "再次输入新密码")
+    self.textComfirm = app.EditBoxFactory:createEditBoxByImage(textComfirm, "Confirm new password")
     self.textComfirm:registerScriptEditBoxHandler(clearTips)
     self.textComfirm:setInputFlag(0)
 
@@ -56,10 +56,10 @@ local function initWidgets(self)
 
             local errCode = InputCheck.checkPsw(strCurrPsw)
             if errCode == 1 then
-                self.labelTips:setString("请输入原始密码")
+                self.labelTips:setString("Old password")
                 return
             elseif errCode == 2 then
-                self.labelTips:setString("密码长度为6~16位")
+                self.labelTips:setString("Password length for 6~16 char")
                 return
             --elseif errCode == 3 then
                 --self.labelTips:setString("密码不能全为数字或全为字母")
@@ -68,23 +68,23 @@ local function initWidgets(self)
 
             errCode = InputCheck.checkPsw(strNewPsw)
             if errCode == 1 then
-                self.labelTips:setString("请输入新的密码")
+                self.labelTips:setString("New password")
                 return
             elseif errCode == 2 then
-                self.labelTips:setString("新密码长度为6~16位")
+                self.labelTips:setString("Password length for 6~16 char")
                 return
             elseif errCode == 3 then
-                self.labelTips:setString("新密码不能全为数字或全为字母")
+                self.labelTips:setString("New password cannot be all numbers or letters")
                 return
             end
 
             if strNewPsw ~= strComfirm then
-                self.labelTips:setString("两次新密码输入不一致！")
+                self.labelTips:setString("Two password entered do not match！")
                 return
             end
 
             if strCurrPsw == strNewPsw then
-                self.labelTips:setString("修改的密码不能与旧密码相同。")
+                self.labelTips:setString("New password cannot be same as the old password。")
                 return
             end
             app.individualLogic:reqChangePsw(strCurrPsw, strNewPsw)
@@ -104,12 +104,12 @@ local function listenEvent(self)
     self.currScene.eventProtocol:addEventListener("SC_CHANGE_PASSWD_P", function(event)
         local ret = event.data.ret
         if ret == 0 then
-            ToastLayer.show("密码修改成功，请牢记新的密码。")
+            ToastLayer.show("Password successfully changed.")
             self:setVisible(false)
         elseif ret == 1 then
-            self.labelTips:setString("原密码错误")
+            self.labelTips:setString("Old password wrong")
         else
-            self.labelTips:setString("未知错误")
+            self.labelTips:setString("unknown error")
         end
     end)
 end

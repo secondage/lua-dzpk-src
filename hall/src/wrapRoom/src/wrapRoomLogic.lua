@@ -49,7 +49,7 @@ function WrapRoomLogic:proc_GC_GETCREATEROOMINFO_ACK_P(data)
 	if data.nResult == 0 then --成功
 		wrapRoom.wrapRoomViewCtrller:show()
 	else--保留	
-		app.toast.show("未知错误:" ..data.nResult)
+		app.toast.show("Unknown error:" ..data.nResult)
 	end
 end
 

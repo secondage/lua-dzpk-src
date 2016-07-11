@@ -35,17 +35,17 @@ local function procUI(self)
 
     local layAccount = self.infoInputLayer:getChildByName("Panel_account")
     local txtAccInputTmp = layAccount:getChildByName("TextField_inputAccount"):hide()
-    local txtAccInput = app.EditBoxFactory:createEditBoxByImage(txtAccInputTmp, "请输入用户名")
+    local txtAccInput = app.EditBoxFactory:createEditBoxByImage(txtAccInputTmp, "Username")
 
     local layNickName = self.infoInputLayer:getChildByName("Panel_nickName")
     local txtNickNameInputTmp = layNickName:getChildByName("TextField_inputNickName"):hide()
     --local txtNickNameInputBg = self.infoInputLayer:getChildByName("shurukuang_2_0"):hide()
-    local txtNickNameInput = app.EditBoxFactory:createEditBoxByImage(txtNickNameInputTmp, "请输入昵称")
+    local txtNickNameInput = app.EditBoxFactory:createEditBoxByImage(txtNickNameInputTmp, "Nickname")
 
     local layPsw = self.infoInputLayer:getChildByName("Panel_passWord")
     local txtPwdInputTmp = layPsw:getChildByName("TextField_inputPwd")
     --local txtPwdInputBg = self.infoInputLayer:getChildByName("shurukuang_2_0_0"):hide()
-    local txtPwdInput = app.EditBoxFactory:createEditBoxByImage(txtPwdInputTmp, "请输入密码")
+    local txtPwdInput = app.EditBoxFactory:createEditBoxByImage(txtPwdInputTmp, "Password")
     txtPwdInput:setInputFlag(0)
     txtPwdInput:registerScriptEditBoxHandler(function(name, sender)
         if name == "began" then
@@ -91,49 +91,49 @@ local function procUI(self)
             local mutipleNickName = UTF82Mutiple(nickName)
 
             if string.len(mutipleAccInput) == 0 then
-                app.toast.show("账号不能为空")
+                app.toast.show("Account must non-empty.")
                 return
             end
 
             print("string.len(mutipleAccInput) = " ..string.len(mutipleAccInput))
             if string.len(mutipleAccInput) < 6 or string.len(mutipleAccInput) > 16 then
-                app.toast.show("账号长度必须为6~16个字符,请重新输入")
+                app.toast.show("Account must in 6-16 chars.")
                 return
             end
 
             if inputCheck.checkIsNumberOnly(mutipleAccInput) then
-                app.toast.show("账号不能全为数字")
+                app.toast.show("Account must number and word.")
                 return
             end
 
             if bChangeNickName then
                 if string.len(mutipleNickName) == 0 then
-                    app.toast.show("昵称不能为空")
+                    app.toast.show("Nickname must non-empty.")
                     return
                 end
 
                 if string.len(mutipleNickName) < 6 or string.len(mutipleNickName) > 16 then
-                    app.toast.show("昵称长度必须为6~16个字符,请重新输入")
+                    app.toast.show("Nickname must in 6-16 chars.")
                     return
                 end
             end
 
             if string.len(txtPwdInput:getString()) == 0 then
-                app.toast.show("密码不能为空")
+                app.toast.show("Password must non-empty")
                 return
             end
 
             if string.len(txtPwdInput:getString()) < 6 or string.len(txtPwdInput:getString()) > 16 then
-                app.toast.show("密码长度不符合")
+                app.toast.show("Password must in 6-16 chars.")
                 return
             end
 
             if inputCheck.checkIsSingleType(txtPwdInput:getString()) then
-                app.toast.show("密码必须为6~16个英文+数字的组合,请重新输入")
+                app.toast.show("Password must number and word.")
                 return
             end
 
-            app.holdOn.show("正在处理,请稍候...", 0.1)
+            app.holdOn.show("Waiting for process...", 0.1)
             self.strAccount = txtAccInput:getString()
             --local nickName = mutipleNickName
             self.strPsw = pwdInput
@@ -159,17 +159,17 @@ local function listenEvent(self)
                 cc.dataMgr.isChangeAccLogin = true
                 app.sceneSwitcher:enterScene("LoginScene")
             end
-            app.msgBox.showMsgBox("您已成功绑定账号，请重新登录", funcOk, nil, nil, true)
+            app.msgBox.showMsgBox("Bind succeeded, please login", funcOk, nil, nil, true)
         elseif ret == 1 then
-            app.toast.show("验证码错误")
+            app.toast.show("Valid code wrong")
         elseif ret == 2 then
-            app.toast.show("用户名已被注册")
+            app.toast.show("Account registered")
         elseif ret == 3 then
-            app.toast.show("昵称已经被注册")
+            app.toast.show("Nickname registered")
         elseif ret == 5 then
-            app.toast.show("系统繁忙，请稍后再试")
+            app.toast.show("System busy")
         elseif ret == 6 then
-            app.toast.show("操作过于频繁，请稍后再试")
+            app.toast.show("Operations too often")
         end
     end)
 end

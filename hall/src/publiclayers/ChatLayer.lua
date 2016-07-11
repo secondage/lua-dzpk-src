@@ -106,7 +106,7 @@ local function procUI(self)
 	procLangUI()
 
 	local chatInputBg = imgChatBg:getChildByName("TextField_chatInput"):hide()
-	local chatInput = app.EditBoxFactory:createEditBoxByImage(chatInputBg, "请输入聊天内容", "editboxbg0.png", 50)
+	local chatInput = app.EditBoxFactory:createEditBoxByImage(chatInputBg, "Please enter to chat", "editboxbg0.png", 50)
 	chatInput:setFontColor(cc.c4b(255, 255, 255, 255))
 	chatInput:registerScriptEditBoxHandler(function(name, sender)
 		if name == "began" then
@@ -124,7 +124,7 @@ local function procUI(self)
 			local strMsg = chatInput:getString()
 
 			if string.len(strMsg) == 0 then
-				app.toast.show("聊天内容不能为空")
+				app.toast.show("Chat content cannot be empty")
 				return
 			end
 
@@ -319,17 +319,17 @@ local function listenEvent(self)
 	self.chatLayer.eventProtocol:addEventListener("GC_TABLE_CHATFAIL_P", function(event) --聊天失败
 		local data = event.data
 		if data.failReason == wnet.EChatFail_Reason.EChatFail_TimeLimit then
-			app.toast.show("聊天过快")
+			app.toast.show("Talking too fast")
 		elseif data.failReason == wnet.EChatFail_Reason.EChatFail_TextFilter then
-			app.toast.show("聊天内容有非法内容")
+			app.toast.show("Chat with illegal content")
 		elseif data.failReason == wnet.EChatFail_Reason.EChatFail_TextLengthOver then
-			app.toast.show("聊天内容超长")
+			app.toast.show("Long chats")
 		elseif data.failReason == wnet.EChatFail_Reason.EChatFail_HonorLess then
-			app.toast.show("声望不足")
+			app.toast.show("Lack of prestige")
 		elseif data.failReason == wnet.EChatFail_Reason.EChatFail_ForbidChat then
-			app.toast.show("因违反用户条例，被禁言")
+			app.toast.show("For Violation of user regulations, be banned")
 		elseif data.failReason == wnet.EChatFail_Reason.EChatFail_NoWatch then
-			app.toast.show("旁观不能聊天")
+			app.toast.show("Can't talk while watching")
 		end
 	end)
 end

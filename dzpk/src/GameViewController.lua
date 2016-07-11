@@ -797,7 +797,7 @@ function GameViewController:procBtnSet()
 		if event == cc.EventCode.ENDED then
 			app.audioPlayer:playClickBtnEffect()
 			if app.bGaming == true and not cc.dataMgr.isWatcher then
-				app.toast.show("很抱歉,游戏中不能退出")
+				app.toast.show("Sorry ,can't exit when gaming.")
 			else
 				print("<=== 123123")
 				cc.lobbyController:sendLeaveTableReq()

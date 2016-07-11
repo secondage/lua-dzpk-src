@@ -205,7 +205,7 @@ function castMultipleSet:init(root,data,bShow)
         local value = tmpSort[i].v
         local keyText = key
         if key==0 then
-            keyText = "取消设置"
+            keyText = "Cancel"
         end
         local item = itemDis:clone()
         app.seekChildByName(item,"Text_dzs_listItem"):setString(keyText)
@@ -269,11 +269,11 @@ function castMultipleSet:initDiZhuUI(infoKey,kind)
     local keyStr = ""
     local valueStr = ""
     if bet==0 or bet==-1 then
-        stateStr = "未设置"
-        keyStr = "取消设置"
+        stateStr = "Not setup"
+        keyStr = "Cancel"
         valueStr = ""
     else
-        stateStr = "底注:"..bet
+        stateStr = "Ante:"..bet
         keyStr = bet
         valueStr = currcy
     end
@@ -295,7 +295,7 @@ function castMultipleSet:addTableSign(tableID,bet,kind)
     if self.tableSignWight == nil then
         return
     end
-    local signText = "底注：1"
+    local signText = "Ante：1"
     local curry = 0
     if kind~=nil and kind==1 then
         curry = self:checkCurrcyBet(bet)
@@ -304,13 +304,13 @@ function castMultipleSet:addTableSign(tableID,bet,kind)
     end
     cc.dataMgr.tableBetInfoInRoom[tableID] = curry
     if math.floor(curry/10000)>=1 then
-        signText = "底注："..math.floor(curry/10000).."万"
+        signText = "Ante："..math.floor(curry/10000).."TK"
     elseif math.floor(curry/1000)>=1 then
-        signText = "底注："..math.floor(curry/1000).."千"
+        signText = "Ante："..math.floor(curry/1000).."K"
     elseif math.floor(curry/100)>=1 then
-        signText = "底注："..math.floor(curry/100).."百"
+        signText = "Ante："..math.floor(curry/100).."H"
     else
-        signText = "底注："..curry
+        signText = "Ante："..curry
     end
 
     local sign = app.seekChildByName(table,"Image_dzs_tableSignBg")
@@ -343,16 +343,16 @@ function castMultipleSet:respSastSet(data)
             app.setBetLayerDZPK:sendEnterSeat()
             app.setBetLayerDZPK = nil
         else
-            app.msgBox.showMsgBox("底注设置成功")
+            app.msgBox.showMsgBox("Setup ante succeed.")
             app.castMultSet.dzsPanel:setVisible(false)
         end
     elseif data.nResult==1 then
         print("ftest respSastSet 2")
-        app.msgBox.showMsgBox("底注设置失败")
+        app.msgBox.showMsgBox("Setup ante failed.")
     elseif data.nResult==2 then
-        app.msgBox.showMsgBox("游戏豆不足")
+        app.msgBox.showMsgBox("Not enough chips.")
     elseif data.nResult==3 then
-        app.toast.show("游戏豆不足，当前底注设置已失效！")
+        app.toast.show("Not enough chips, ante setup failed.")
         cc.dataMgr.castMultSet.beiShuInfo.nBet = data.nBet
         cc.dataMgr.castMultSet.beiShuInfo.gameCurrencyLimit = data.gamecurrencyLimit
         cc.dataMgr.tableBetInfoInRoom[cc.dataMgr.selectTableIDNow] = cc.dataMgr.castMultSet.beiShuInfo.nBet
