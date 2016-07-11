@@ -35,7 +35,7 @@ function CustomLayer:playCustomEvent(gameId) --返回1 游戏存在 0 表示 内
 	if cc.dataMgr.lastSelectGameId ~=0 and cc.dataMgr.lastSelectGameId ~= gameId then
 		local dbHelper = require("app.func.GameDB")
 		local lastSelectGame = dbHelper.getGameNameByGameID(cc.dataMgr.lastSelectGameId)
-		print("上次玩的游戏是 = " ..lastSelectGame)
+		print("Last game = " ..lastSelectGame)
 
 		if lastSelectGame ~= "" then
 			local resHelper = require(lastSelectGame .."/src/ResHelper")
