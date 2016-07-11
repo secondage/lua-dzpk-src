@@ -61,12 +61,12 @@ function CancelControl:doCancelScene()
             local function funcOk()
                 app.sceneSwitcher:enterScene("LoginScene")
             end
-            app.msgBox.showMsgBoxTwoBtn("是否返回到登录界面？", funcOk)
+            app.msgBox.showMsgBoxTwoBtn("Back to the login screen？", funcOk)
         elseif currSceneName == "LoginScene" then
             local function funcOk()
                 --todo:退出游戏
             end
-            app.msgBox.showMsgBoxTwoBtn("是否退出游戏？", funcOk)
+            app.msgBox.showMsgBoxTwoBtn("Exit Game？", funcOk)
         else
             self:popScene()
             local lastSceneName = self.scenes[#self.scenes]

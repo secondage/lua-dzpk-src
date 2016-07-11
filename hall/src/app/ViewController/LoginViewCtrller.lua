@@ -55,16 +55,16 @@ function LoginViewCtrller:listenEvent()
 		local info = ""
 		if event.data.loginRet == wnet.ELoginResult.ELOGIN_RESULT_OK then
 			cc.msgHandler:connectToLobby()
-		elseif event.data.loginRet == 1 then info = "验证码错误"
-		elseif event.data.loginRet == 2 then info = "用户不存在"
-		elseif event.data.loginRet == 3 then info = "密码错误"
-		elseif event.data.loginRet == 4 then info = "账号绑定在其它机器登录"
-		elseif event.data.loginRet == 5 then info = "账号被禁用"
-		elseif event.data.loginRet == 6 then info = "账号被封冻"
-		elseif event.data.loginRet == 7 then info = "账号失效"
-		elseif event.data.loginRet == 8 then info = "账号已经登录"
-		elseif event.data.loginRet == 9 then info = "系统繁忙"
-		elseif event.data.loginRet == 10 then info = "动态密码错误" end
+		if event.data.loginRet == 1 then app.toast.show("Validcode wrong")
+		elseif event.data.loginRet == 2 then app.toast.show("Account not exist")
+		elseif event.data.loginRet == 3 then app.toast.show("Password wrong")
+		elseif event.data.loginRet == 4 then app.toast.show("Account logged in on the other host")
+		elseif event.data.loginRet == 5 then app.toast.show("Account banned")
+		elseif event.data.loginRet == 6 then app.toast.show("Account banned")
+		elseif event.data.loginRet == 7 then app.toast.show("Account failed")
+		elseif event.data.loginRet == 8 then app.toast.show("Account logged in")
+		elseif event.data.loginRet == 9 then app.toast.show("System busy")
+		elseif event.data.loginRet == 10 then app.toast.show("Dynamic pwd wrong") end
 
 		if event.data.loginRet ~= wnet.ELoginResult.ELOGIN_RESULT_OK then
 			local function clickOK()
@@ -94,13 +94,13 @@ function LoginViewCtrller:listenEvent()
                 app.sceneSwitcher:enterScene("LoginScene")
             end
             app.holdOn.hide()
-            app.msgBox.showMsgBoxEx({strMsg = "账号已经登录!", funcOk = clickOK, isHideX = true})
+            app.msgBox.showMsgBoxEx({strMsg = "Account logged in", funcOk = clickOK, isHideX = true})
 		else
 			local function clickOK()
                 app.sceneSwitcher:enterScene("LoginScene")
             end
             app.holdOn.hide()
-            app.msgBox.showMsgBoxEx({strMsg = "连接已断开,请重新登录!", funcOk = clickOK, isHideX = true})
+            app.msgBox.showMsgBoxEx({strMsg = "Connect broken!", funcOk = clickOK, isHideX = true})
 		end
 	end)
 end

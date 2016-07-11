@@ -65,7 +65,7 @@ function holdOn.show(text, delayTime, parent, listener)
 			if listener then
 				listener()
 			else
-				app.toast.show("请求超时,请重试...")
+				app.toast.show("time out, try again!")
 			end
 		end
 		_coutTime = _coutTime + 1
