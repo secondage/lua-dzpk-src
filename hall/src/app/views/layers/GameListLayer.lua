@@ -404,7 +404,7 @@ function GameListLayer:onBtnEvt(sender, eventType)
 		local function enterRoom()
 			local p = require(cc.dataMgr.playingGame ..".src.CustomLayer")
 			if p:playCustomEvent(gameId) == 1 then
-				app.holdOn.show("正在获取房间列表信息...")
+				app.holdOn.show("Waiting for room list...")
 			end
 		end
 
@@ -598,7 +598,7 @@ function GameListLayer:showGameList()
     		local function enterRoom()
 			local p = require("dzpk.src.CustomLayer")
 			if p:playCustomEvent(90) == 1 then
-				app.holdOn.show("正在获取房间列表信息...")
+				app.holdOn.show("Waiting for room list...")
 			end
 		end
 
