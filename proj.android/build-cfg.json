@@ -10,11 +10,12 @@
         {
             "from": "../../../src",
             "to": "src",
-			"exclude": "../../../src.git"
+			"exclude": "../../src/.git"
         },
         {
             "from": "../../../res",
-            "to": "res"
+            "to": "res",
+			"exclude": "../../res/.git"
         },
         {
             "from": "../../../UPPayData/data.bin",
