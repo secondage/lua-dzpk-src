@@ -100,7 +100,7 @@ function IndividualLayer:fillDataToUI()
         if userData.vipLevel < 0 then
             strVip = -userData.vipLevel.."Lv(expire)"
         else
-            strVip = userData.vipLevel.."Lv(expire)"
+            strVip = userData.vipLevel.."Lv"
         end
     end
     labelVip:setString(strVip)

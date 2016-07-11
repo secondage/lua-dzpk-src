@@ -55,16 +55,16 @@ function LoginViewCtrller:listenEvent()
 		local info = ""
 		if event.data.loginRet == wnet.ELoginResult.ELOGIN_RESULT_OK then
 			cc.msgHandler:connectToLobby()
-		if event.data.loginRet == 1 then app.toast.show("Validcode wrong")
-		elseif event.data.loginRet == 2 then app.toast.show("Account not exist")
-		elseif event.data.loginRet == 3 then app.toast.show("Password wrong")
-		elseif event.data.loginRet == 4 then app.toast.show("Account logged in on the other host")
-		elseif event.data.loginRet == 5 then app.toast.show("Account banned")
-		elseif event.data.loginRet == 6 then app.toast.show("Account banned")
-		elseif event.data.loginRet == 7 then app.toast.show("Account failed")
-		elseif event.data.loginRet == 8 then app.toast.show("Account logged in")
-		elseif event.data.loginRet == 9 then app.toast.show("System busy")
-		elseif event.data.loginRet == 10 then app.toast.show("Dynamic pwd wrong") end
+		elseif event.data.loginRet == 1 then info = "Validcode wrong"
+		elseif event.data.loginRet == 2 then info = "Account not exist"
+		elseif event.data.loginRet == 3 then info = "Password wrong"
+		elseif event.data.loginRet == 4 then info = "Account logged in on the other host"
+		elseif event.data.loginRet == 5 then info = "Account banned"
+		elseif event.data.loginRet == 6 then info = "Account banned"
+		elseif event.data.loginRet == 7 then info = "Account failed"
+		elseif event.data.loginRet == 8 then info = "Account logged in"
+		elseif event.data.loginRet == 9 then info = "System busy"
+		elseif event.data.loginRet == 10 then info = "Dynamic pwd wrong" end
 
 		if event.data.loginRet ~= wnet.ELoginResult.ELOGIN_RESULT_OK then
 			local function clickOK()
@@ -94,13 +94,13 @@ function LoginViewCtrller:listenEvent()
                 app.sceneSwitcher:enterScene("LoginScene")
             end
             app.holdOn.hide()
-            app.msgBox.showMsgBoxEx({strMsg = "Account logged in", funcOk = clickOK, isHideX = true})
+            app.msgBox.showMsgBoxEx({strMsg = "Account logged in!", funcOk = clickOK, isHideX = true})
 		else
 			local function clickOK()
                 app.sceneSwitcher:enterScene("LoginScene")
             end
             app.holdOn.hide()
-            app.msgBox.showMsgBoxEx({strMsg = "Connect broken!", funcOk = clickOK, isHideX = true})
+            app.msgBox.showMsgBoxEx({strMsg = "Disconnect, login again!", funcOk = clickOK, isHideX = true})
 		end
 	end)
 end
