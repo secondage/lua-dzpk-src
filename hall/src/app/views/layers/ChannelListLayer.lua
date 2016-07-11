@@ -269,7 +269,7 @@ local function createRooms(self, channelProtopyte, data)
 
 					cc.dataMgr.selectRoonName = v.gameInfo.chanelName
 
-					app.holdOn.show("正在获取房间内信息...")
+					app.holdOn.show("Waiting for room info...")
 					cc.msgHandler:connectToGame(v.svrInfo.srvIP, v.svrInfo.srvPort)
 	
 				end

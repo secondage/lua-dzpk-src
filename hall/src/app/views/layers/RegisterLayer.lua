@@ -109,11 +109,11 @@ function RegisterLayerCtrller:procPhonePayer_2()
 
 
 	local txtPhoneNickName_phone_Temp = self.phoneRegLayer2:getChildByName("TextField_inputNickName")
-	txtPhoneNickName_phone = app.EditBoxFactory:createEditBoxByImage(txtPhoneNickName_phone_Temp, "请输入昵称")
+	txtPhoneNickName_phone = app.EditBoxFactory:createEditBoxByImage(txtPhoneNickName_phone_Temp, "Please input nickName")
 	self.txtPhoneNickName_phone = txtPhoneNickName_phone
 
 	local txtPhonePwd_phone_Temp = self.phoneRegLayer2:getChildByName("TextField_inputPwd")
-	txtPhonePwd_phone = app.EditBoxFactory:createEditBoxByImage(txtPhonePwd_phone_Temp, "请输入密码")
+	txtPhonePwd_phone = app.EditBoxFactory:createEditBoxByImage(txtPhonePwd_phone_Temp, "Please input password")
 	self.txtPhonePwd_phone = txtPhonePwd_phone
 
 	local btnOK = self.phoneRegLayer2:getChildByName("Button_btnOK")
@@ -128,7 +128,7 @@ function RegisterLayerCtrller:procPhonePayer_2()
 			local mutipleNickName = UTF82Mutiple(nickName)
 
 			if string.len(mutipleNickName) == 0 then
-				app.toast.show("昵称不能为空")
+				app.toast.show("Nickname empty")
 				return
 			end
 
@@ -278,47 +278,47 @@ function RegisterLayerCtrller:procPtLayer()
 			local mutipleNickName = UTF82Mutiple(nickName)
 
 			if string.len(mutipleAccInput) == 0 then
-				app.toast.show("账号不能为空")
+				app.toast.show("Nickname must non-empty")
 				return
 			end
 
 			print("string.len(mutipleAccInput) = " ..string.len(mutipleAccInput))
 			if string.len(mutipleAccInput) < 6 or string.len(mutipleAccInput) > 16 then
-				app.toast.show("账号长度必须为6~16个字符,请重新输入")
+				app.toast.show("Nickname must in 6-16 chars")
 				return
 			end
 
 			if inputCheck.checkIsNumberOnly(mutipleAccInput) then
-				app.toast.show("账号不能全为数字")
+				app.toast.show("Account not all number")
 				return
 			end
 
 			if string.len(mutipleNickName) == 0 then
-				app.toast.show("昵称不能为空")
+				app.toast.show("Account must non-empty")
 				return
 			end
 
 			if string.len(mutipleNickName) < 6 or string.len(mutipleNickName) > 16 then
-				app.toast.show("昵称长度必须为6~16个字符,请重新输入")
+				app.toast.show("Account must in 6-16 chars")
 				return
 			end
 
 			if string.len(txtPwdInput:getString()) == 0 then
-				app.toast.show("密码不能为空")
+				app.toast.show("Password must non-empty")
 				return
 			end
 
 			if string.len(txtPwdInput:getString()) < 6 or string.len(txtPwdInput:getString()) > 16 then
-				app.toast.show("密码长度不符合")
+				app.toast.show("Password must in 6-16 chars")
 				return
 			end
 
 			if inputCheck.checkIsSingleType(txtPwdInput:getString()) then
-				app.toast.show("密码必须为6~16个英文+数字的组合,请重新输入")
+				app.toast.show("Password must number and letters in 6-16 chars")
 				return
 			end
 		
-			app.holdOn.show("注册中,请稍候...", 0.1)
+			app.holdOn.show("Waiting for register...", 0.1)
 			self.accInput = txtAccInput:getString()
 			self.nickName = txtNickNameInput:getString()
 			self.pwdInput = pwdInput
@@ -424,7 +424,7 @@ function RegisterLayerCtrller:onLC_PHONECODE_REG_ACK_P(event)
 		app.loginScene.password = self.pwdInput
 		--cc.UserDefault:getInstance():setStringForKey("username", self.accInput)
 		--cc.UserDefault:getInstance():setStringForKey("password", self.pwdInput)
-		local time = app.toast.show("恭喜您,注册成功")
+		local time = app.toast.show("Congratulations,register successful!")
 		scheduler.performWithDelayGlobal(function()
 			self.registerLayer:removeSelf()
 			app.loginScene.registerLayer = nil
@@ -434,12 +434,12 @@ function RegisterLayerCtrller:onLC_PHONECODE_REG_ACK_P(event)
 			nodeAccInfo:getChildByTag(11):setString("********")
 			--app.loginScene:getResourceNode():getChildByName("Node_dengluzhuce"):getChildByName("Button_back"):show()
 		end, time)
-	elseif data.ret == 1 then app.toast.show("验证码错误")
-	elseif data.ret == 2 then app.toast.show("账号已被使用")
-	elseif data.ret == 3 then app.toast.show("昵称已被使用")
-	elseif data.ret == 4 then app.toast.show("时限未到")
-	elseif data.ret == 5 then app.toast.show("系统繁忙")
-	elseif data.ret == 7 then app.toast.show("手机号码已被使用")
+	elseif data.ret == 1 then app.toast.show("Validcode wrong!")
+	elseif data.ret == 2 then app.toast.show("Account has be used!")
+	elseif data.ret == 3 then app.toast.show("Nickname has be used!")
+	elseif data.ret == 4 then app.toast.show("Time is not up!")
+	elseif data.ret == 5 then app.toast.show("System busy!")
+	--elseif data.ret == 7 then app.toast.show("手机号码已被使用")
 	end
 end
 
