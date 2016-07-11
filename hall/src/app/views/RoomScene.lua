@@ -858,7 +858,7 @@ function RoomScene:onGC_ENTERTABLE_ACK_P(event)
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidMinWin then
 		app.toast.show("min win")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidMaxDisc then
-		app.toast.show("max disc)
+		app.toast.show("max disc")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidMaxDelay then
 		app.toast.show("max delay")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidMinScore then
