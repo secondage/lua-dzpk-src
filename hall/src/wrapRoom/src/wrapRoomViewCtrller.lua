@@ -138,7 +138,7 @@ local function proBtnOK(self)
 		if type == 2 then
 			app.audioPlayer:playClickBtnEffect()
 			if _nBet <= 0 then
-				app.toast.show("请设置正确底注")
+				app.toast.show("Please setup ante")
 				return
 			end
 			wrapRoom.wrapRoomMsgSender:sendCREATEROOMREQ(_nBet, _strPwd, _nWatch)
@@ -175,7 +175,7 @@ end
 
 local function clearUI(self)
 	local txtBet = self.imgBg:getChildByName("Text_bet")
-	txtBet:setString("请设置底注")
+	txtBet:setString("Please setup ante")
 
 	local nodePwd = self.imgBg:getChildByName("Node_pwd")
 	nodePwd:getChildByName("CheckBox_yes"):setSelected(false)

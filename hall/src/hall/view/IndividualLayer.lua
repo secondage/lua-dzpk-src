@@ -30,14 +30,14 @@ end
 function IndividualLayer:listenEvent()
     self.currScene.eventProtocol:addEventListener("SC_CHANGE_NICKNAME_P", function(event) --修改昵称、头像、性别
     if event.data.ret == 0 then
-        ToastLayer.show("修改成功")
+        ToastLayer.show("Succeeded")
     else
         if event.data.ret == 1 then
-            ToastLayer.show("昵称已存在")--昵称已存在
+            ToastLayer.show("Nickname exist")--昵称已存在
         elseif event.data.ret == 2 then
-            ToastLayer.show("昵称非法")--昵称非法
+            ToastLayer.show("Nickname invalid")--昵称非法
         else
-            ToastLayer.show("未知错误")--未知错误
+            ToastLayer.show("Unknown error")--未知错误
         end
     end
     end)
@@ -95,14 +95,14 @@ function IndividualLayer:fillDataToUI()
     local labelVip = ccui.Helper:seekWidgetByName(layIndividual, "Text_vipState")
     local strVip = ""
     if userData.vipBegin ==0 and userData.vipExp == 0 then
-        strVip = "未开通"
+        strVip = "Invalid"
     else
         if userData.vipLevel < 0 then
-            strVip = -userData.vipLevel.."级(已过期)"
+            strVip = -userData.vipLevel.."Lv(expire)"
         else
-            strVip = userData.vipLevel.."级"
+            strVip = userData.vipLevel.."Lv"
         end
-    end
+    endexpire
     labelVip:setString(strVip)
     local nextLevel = userData.honorLevel + 1
     if nextLevel > 18 then nextLevel = 18 end
@@ -276,12 +276,12 @@ function IndividualLayer:initWidgetsEventListener()
                 local strNickName = self.textNickName:getString()
                 local mutipleNickName = UTF82Mutiple(strNickName)
                 if string.len(mutipleNickName) < 6 or string.len(mutipleNickName) > 16 then
-                    ToastLayer.show("昵称长度为6~16字符")
+                    ToastLayer.show("Nicknames 6~16 characters in length")
                     self:fillDataToUI()
                     return
                 end
                 if inputCheck.contaiIllegalChar(strNickName) then
-                    ToastLayer.show("昵称含有非法字符")
+                    ToastLayer.show("Nickname contains invalid characters")
                     self:fillDataToUI()
                     return
                 end

@@ -31,19 +31,19 @@ function CofferLayer:listenEvent()
         print("保险箱操作")
         local ret = event.data.cRet
         if ret == 0 then
-            ToastLayer.show("操作成功")
+            ToastLayer.show("Succeeded")
         elseif ret == 1 then
-            ToastLayer.show("二级密码错误")
+            ToastLayer.show("Password wrong")
         elseif ret == 2 then
-            ToastLayer.show("游戏豆不足")
+            ToastLayer.show("Not enough chips")
         elseif ret == 3 then
-            ToastLayer.show("保险箱游戏豆不足 ")
+            ToastLayer.show("Not enough chips in safebox")
         elseif ret == 4 then
-            ToastLayer.show("正在游戏中，不能进行该操作")
+            ToastLayer.show("Can't set safebox when gameing")
         elseif ret == 5 then
-            ToastLayer.show("保险箱已过期或未开通")
+            ToastLayer.show("Safebox not register or timeout")
         else
-            ToastLayer.show("未知错误")
+            ToastLayer.show("Unknown error")
         end
     end)
 
@@ -51,15 +51,15 @@ function CofferLayer:listenEvent()
         print("保险箱延期")
         local ret = event.data.cRet
         if ret == 0 then
-            ToastLayer.show("操作成功")
+            ToastLayer.show("Succeeded")
         elseif ret == 3 then
-            ToastLayer.show("二级密码错误")
+            ToastLayer.show("Password wrong")
         elseif ret == 4 then
-            ToastLayer.show("游戏豆不足")
+            ToastLayer.show("Not enough chips")
         elseif ret == 6 then
-            ToastLayer.show("游戏中不能进行该操作")
+            ToastLayer.show("Can't set safebox when gameing")
         else
-            ToastLayer.show("未知错误")
+            ToastLayer.show("Unknown error")
         end
     end)
 
@@ -73,11 +73,11 @@ function CofferLayer:listenEvent()
             app.popLayer.show(self.layCoffer:getChildByName("Image_background"))
             self.layCoffer:setVisible(true)
         elseif ret == 1 then
-            ToastLayer.show("二级密码有误，请重新输入。")
+            ToastLayer.show("Password wrong")
         elseif ret == 2 then
-            ToastLayer.show("请先注册二级密码")
+            ToastLayer.show("Input password")
         else
-            ToastLayer.show("未知错误")
+            ToastLayer.show("Unknown error")
         end
     end)
 
@@ -112,12 +112,12 @@ function CofferLayer:initWidgets()
             local userData = cc.dataMgr.lobbyUserData.lobbyUser
             app.audioPlayer:playClickBtnEffect()
             if userData.isHaveAdvPasswd == 0 then
-                ToastLayer.show("请先注册二级密码")
+                ToastLayer.show("Register second level password frist.")
                 return
             end
             local strSePsw = self.textSePsw:getString()
             if string.len(strSePsw) < 8 then
-                ToastLayer.show("请输入正确的二级密码")
+                ToastLayer.show("Input second-level password")
                 return
             end
 
@@ -157,7 +157,7 @@ function CofferLayer:initWidgets()
     end)
 
     local textCurrency = ccui.Helper:seekWidgetByName(layCoffer, "TextField_optionNum")
-    self.textCurrency = app.EditBoxFactory:createEditBoxByImage(textCurrency, "请输入游戏豆数量")
+    self.textCurrency = app.EditBoxFactory:createEditBoxByImage(textCurrency, "Number of chips")
     local function onCurrencyInput(name, sender)
         if name == "changed" then
             local strInput = self.textCurrency:getString()
@@ -175,12 +175,12 @@ function CofferLayer:initWidgets()
             local strCurrency = self.textCurrency:getString()
             self.textCurrency:setString("")
             if strCurrency == "" then
-                ToastLayer.show("请输入游戏豆数量")
+                ToastLayer.show("Number of chips")
                 return
             end
             local gameCurrency = tonumber(strCurrency)
             if gameCurrency <= 0 then
-                ToastLayer.show("请输入正确的游戏豆数量")
+                ToastLayer.show("Number of chips is wrong")
                 return
             end
             local opType = -1
@@ -195,7 +195,7 @@ function CofferLayer:initWidgets()
                 end
             end
             if self.strSePsw == nil then
-                app.toast.show("二级密码验证出错，请重新进入保险箱")
+                app.toast.show("Second-level password wrong")
                 self:setVisible(false)
             end
             print("reqCofferOp: "..opType.." "..gameCurrency.." "..self.strSePsw)
@@ -217,18 +217,18 @@ function CofferLayer:initWidgets()
     local checkMonth1 = ccui.Helper:seekWidgetByName(layRenewal, "CheckBox_month1")
     local checkMonth3 = ccui.Helper:seekWidgetByName(layRenewal, "CheckBox_month3")
     local labelNeedCurrency = ccui.Helper:seekWidgetByName(layRenewal, "Text_needCurrency")
-    labelNeedCurrency:setString("需要花费10500游戏豆")
+    labelNeedCurrency:setString("Need 10500 chips")
     checkMonth1:addEventListener(function(widget, type)
         app.audioPlayer:playClickBtnEffect()
         checkMonth3:setSelected(fasle)
         checkMonth1:setSelected(true)
-        labelNeedCurrency:setString("需要花费10500游戏豆")
+        labelNeedCurrency:setString("Need 10500 chips")
     end)
     checkMonth3:addEventListener(function(widget, type)
         app.audioPlayer:playClickBtnEffect()
         checkMonth1:setSelected(fasle)
         checkMonth3:setSelected(true)
-        labelNeedCurrency:setString("需要花费31500游戏豆")
+        labelNeedCurrency:setString("Need 31500 chips")
     end)
     local btnOkRenewal = ccui.Helper:seekWidgetByName(layRenewal, "Button_ok")
     btnOkRenewal:setPressedActionEnabled(true)
@@ -261,11 +261,11 @@ function CofferLayer:fillDataToUI()
     local time = os.date("*t", userData.cofferEnd)
     local strTime = ""
     if userData.cofferstate == 0 then
-        strTime = "未开通"
+        strTime = "Not valid"
     else
-        strTime = time.year.."年"..time.month.."月"..time.day.."日"
+        strTime = time.year.."Year"..time.month.."Mouth"..time.day.."Day"
         if userData.cofferstate == 1 then
-            strTime = strTime.."(已过期)"
+            strTime = strTime.."(Timeout)"
         end
     end
     self.labelTime:setString(strTime)

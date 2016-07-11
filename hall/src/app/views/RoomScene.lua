@@ -117,7 +117,7 @@ function RoomScene:onCreate()
 	btnFastJoin:addTouchEventListener(function(obj, type)
 		if type == 2 then
 			app.audioPlayer:playClickBtnEffect()
-			app.holdOn.show("正在查询最佳桌子...")
+			app.holdOn.show("Search table...")
 			cc.lobbyController:sendFastJoinReq()
 		end
 	end)
@@ -189,7 +189,7 @@ function RoomScene:onEnterTransitionFinish_()
 
 	
 	if cc.dataMgr.isBroken then
-		app.holdOn.show("正在加入桌子...", 0.5, self:getResourceNode())
+		app.holdOn.show("Waiting for enter table...", 0.5, self:getResourceNode())
 	end
 end
 
@@ -215,15 +215,15 @@ local function _procBigNumber(num)
     if num <= 100000 then
         return tostring(num)
     elseif num <= 1000000 then
-        local _b = num / 10000
-        local s = string.format("%.2f万", _b)
+        local _b = num / 1000
+        local s = string.format("%.2fK", _b)
         return s
     elseif num <= 100000000 then
-        local _b = math.floor(num / 10000)
-        return _b .. "万"
+        local _b = math.floor(num / 1000)
+        return _b .. "K"
     else
-        local _b = math.floor(num / 100000000)
-        local s = string.format("%.2f亿", _b)
+        local _b = math.floor(num / 1000000)
+        local s = string.format("%.2fM", _b)
         return s
     end
 end
@@ -387,7 +387,7 @@ function RoomScene:dealWapRoomChair(imgTable)
 end
 
 local function enterTableReq(tableId, chairId, strPwd)
-	cc.showLoading("正在加入桌子")
+	cc.showLoading("Waiting for enter table")
 	cc.lobbyController:sendLoginTableReq(tableId - 1, chairId - 1, strPwd)
 end
 
@@ -406,7 +406,7 @@ function RoomScene:showPwdInputMsg(imgChair)
 				enterTableReq(tableId, chairId, inputText)
 			end
 
-			inputMsg.show({text = "请输入密码:", holdText = "请输入密码", funcOK = btnOKEvt})
+			inputMsg.show({text = "Password:", holdText = "Password", funcOK = btnOKEvt})
 
 			return true
 		end
@@ -850,41 +850,41 @@ function RoomScene:onGC_ENTERTABLE_ACK_P(event)
 		app.sceneSwitcher:enterScene("GameScene")
 		--app.toast.show("手机玩家不支持旁观")
 	elseif ret == wnet.EnterTable_Result.EnterTable_BeOccupyeed then
-		app.toast.show("该位置已经有人先坐了")
+		app.toast.show("The position has been to sit")
 	elseif ret == wnet.EnterTable_Result.EnterTable_MoneyLimit then
-		app.toast.show("游戏豆不足")
+		app.toast.show("Don't have enough chips")
 	elseif ret == wnet.EnterTable_Result.EnterTable_WrongPasswd then
-		app.toast.show("密码错误")
+		app.toast.show("Password wrong")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidMinWin then
-		app.toast.show("不满足其它玩家的最小胜率要求")
+		app.toast.show("min win")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidMaxDisc then
-		app.toast.show("不满足其它玩家的最大断线率要求")
+		app.toast.show("max disc)
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidMaxDelay then
-		app.toast.show("不满足其它玩家的最大延迟要求")
+		app.toast.show("max delay")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidMinScore then
-		app.toast.show("不满足最小积分或游戏豆要求")
+		app.toast.show("min score")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidIp then
-		app.toast.show("不满足其它的玩家的同ip限制要求")
+		app.toast.show("same ip")
 	elseif ret == wnet.EnterTable_Result.EnterTable_GameFix then
-		app.toast.show("游戏维护，暂时不能进入")
+		app.toast.show("Game fixing")
 	elseif ret == wnet.EnterTable_Result.EnterTable_Busy then
-		app.toast.show("系统繁忙")
+		app.toast.show("System busy")
 	elseif ret == wnet.EnterTable_Result.EnterTable_GainOver then
-		app.toast.show("输过上限， 当天不能继续游戏")
+		app.toast.show("Gain over today")
 	elseif ret == wnet.EnterTable_Result.EnterTable_NoTrail then
-		app.toast.show("试玩玩家不能加入游戏豆类游戏")
+		app.toast.show("Trail player")
 	elseif ret == wnet.EnterTable_Result.EnterTable_Gaming then
-		app.toast.show("游戏正在进行，不能加入")
+		app.toast.show("Gameing is on air")
 	elseif ret == wnet.EnterTable_Result.EnterTable_WatchNumLimit then
-		app.toast.show("手机玩家不支持旁观")
+		app.toast.show("Mobile player not watch")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ScoreLimit then
-		app.toast.show("积分不足")
+		app.toast.show("Don't have enough score")
 	elseif ret == wnet.EnterTable_Result.EnterTalbe_ForbidSetCustomMinScore then
 		if event.data.minGameCurrency then
-			app.toast.show("您未满足玩家最低游戏豆为" ..event.data.minGameCurrency .."限制要求,加入失败!")
+			app.toast.show("Chips limit to" ..event.data.minGameCurrency .."so enter failed!")
 		end
 	elseif ret == wnet.EnterTable_Result.EnterTable_RoomExists then
-		app.toast.show("很抱歉,房间已经存在")
+		app.toast.show("Room exist")
 	end
 
 	if ret ~= wnet.EnterTable_Result.EnterTable_OK and ret ~= wnet.EnterTable_Result.EnterTable_OB then
@@ -951,7 +951,7 @@ function RoomScene:onGC_GETSHOWSETBETINFO_ACK_P(event)
 		if cc.dataMgr.playingGame == "dzpk" and cc.dataMgr.tableBetInfoInRoom[data.tableId + 1] == nil then
 			--print"点击了一下座位，底注消息还未接受"
 		else
-			cc.showLoading("正在加入桌子")
+			cc.showLoading("Waiting for enter table")
 			cc.lobbyController:sendLoginTableReq(data.tableId, data.chairId)
 		end
 	end

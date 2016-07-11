@@ -94,7 +94,7 @@ function LoginScene:onCreate()
 	btnGuestLogin:addTouchEventListener(function(obj, type)
 		if type == 2 then
 			app.audioPlayer:playClickBtnEffect()
-			app.holdOn.show("正在获取登录信息...")
+			app.holdOn.show("Waiting for login...")
 			self:reqGuestLogin()
 		end
 	end)
@@ -108,7 +108,7 @@ function LoginScene:onCreate()
 	
 	local accountInputTmp = nodeAccInfo:getChildByName("TextField_tfAcc"):hide()
 	--local accountInputBg = nodeAccInfo:getChildByName("Image_accbg"):getChildByName("Image_3"):hide()
-	local accountInput = app.EditBoxFactory:createEditBoxByImage(accountInputTmp, "请输入用户名", "editboxbg0.png", 50)
+	local accountInput = app.EditBoxFactory:createEditBoxByImage(accountInputTmp, "Username", "editboxbg0.png", 50)
 	accountInput:setTag(10)
 	accountInput:setOpacity(0)
 	accountInput:setFontColor(cc.c4b(255, 255, 255, 255))
@@ -129,7 +129,7 @@ function LoginScene:onCreate()
 
 	local pwdInputTmp = nodeAccInfo:getChildByName("TextField_tfPwd"):hide()
 	--local pwdInputBg = nodeAccInfo:getChildByName("Image_pwdbg"):getChildByName("Image_3"):hide()
-	local pwdInput = app.EditBoxFactory:createEditBoxByImage(pwdInputTmp, "请输入密码", "editboxbg0.png", 50)
+	local pwdInput = app.EditBoxFactory:createEditBoxByImage(pwdInputTmp, "Password", "editboxbg0.png", 50)
 	pwdInput:setTag(11)
 	pwdInput:setOpacity(0)
 	pwdInput:setReturnType(1)
@@ -215,19 +215,19 @@ function LoginScene:onBtnLoginClick(obj, type)
 		local password = pwdInput:getString()
 
 		if username == "" then
-			app.toast.show("账号不能为空")
+			app.toast.show("Username must non-empty")
 			return
 		end
 		if password == "" then
-			app.toast.show("密码不能为空")
+			app.toast.show("Password must non-empty")
 			return
 		end
 
-		app.holdOn.showEx("登录中...", {
+		app.holdOn.showEx("Login...", {
 			listener = function()
 				pickBtn(self.btnLogin)
 				pickBtn(self.btnReg)
-				app.msgBox.showMsgBox("连接失败,请检查网络是否连接")
+				app.msgBox.showMsgBox("Connect failed, check network status")
 			end
 		})
 
@@ -264,7 +264,7 @@ function LoginScene:listenEvent()
 
 	----////////////以下为断线重连用
 	self.eventProtocol:addEventListener("PL_PHONE_SC_GAMELIST_ACK_P", function() --获取房间列表回复
-		app.holdOn.show("正在获取房间内信息...", 0.5)
+		app.holdOn.show("Waiting for room info...", 0.5)
 		for i = 0, #cc.dataMgr.gameList.vecGameInfo - 1 do
 			local v = cc.dataMgr.gameList.vecGameInfo[i + 1]
 			if  cc.dataMgr.selectServerID == v.svrInfo.srvID then
@@ -336,26 +336,26 @@ function LoginScene:onPL_PHONE_LC_LOGIN_ACK_P(event)
 		pickBtn(self.btnReg)
 		cc.hideLoading()
 		print("onPL_PHONE_LC_LOGIN_ACK_P failed "..event.data.loginRet)
-		if event.data.loginRet == 1 then app.toast.show("验证码错误")
-		elseif event.data.loginRet == 2 then app.toast.show("用户不存在")
-		elseif event.data.loginRet == 3 then app.toast.show("密码错误")
-		elseif event.data.loginRet == 4 then app.toast.show("账号绑定在其它机器登录")
-		elseif event.data.loginRet == 5 then app.toast.show("账号被禁用")
-		elseif event.data.loginRet == 6 then app.toast.show("账号被封冻")
-		elseif event.data.loginRet == 7 then app.toast.show("账号失效")
-		elseif event.data.loginRet == 8 then app.toast.show("账号已经登录")
-		elseif event.data.loginRet == 9 then app.toast.show("系统繁忙")
-		elseif event.data.loginRet == 10 then app.toast.show("动态密码错误") end
+		if event.data.loginRet == 1 then app.toast.show("Validcode wrong")
+		elseif event.data.loginRet == 2 then app.toast.show("Account not exist")
+		elseif event.data.loginRet == 3 then app.toast.show("Password wrong")
+		elseif event.data.loginRet == 4 then app.toast.show("Account logged in on the other host")
+		elseif event.data.loginRet == 5 then app.toast.show("Account banned")
+		elseif event.data.loginRet == 6 then app.toast.show("Account banned")
+		elseif event.data.loginRet == 7 then app.toast.show("Account failed")
+		elseif event.data.loginRet == 8 then app.toast.show("Account logged in")
+		elseif event.data.loginRet == 9 then app.toast.show("System busy")
+		elseif event.data.loginRet == 10 then app.toast.show("Dynamic pwd wrong") end
 	end
 end
 
 -------------
 local function showDialogue(self)
-	app.holdOn.show("连接中...", 0, self, handler(self, self.showDialogue))
+	app.holdOn.show("Connecting...", 0, self, handler(self, self.showDialogue))
 end
 
 function LoginScene:showDialogue()
-	app.msgBox.showMsgBoxTwoBtn("再次执行！", function()
+	app.msgBox.showMsgBoxTwoBtn("Again", function()
 		showDialogue(self)
 	end)
 end
@@ -363,9 +363,9 @@ end
 
 function LoginScene:onEnterTransitionFinish_()
 	--showDialogue(self)		
-	app.holdOn.show("连接中...", 0, self, function()
+	app.holdOn.show("Connecting...", 0, self, function()
 		cc.msgHandler:connect("login")
-		app.msgBox.showMsgBox("连接失败,请检查网络是否连接")
+		app.msgBox.showMsgBox("Connect failed,check network status")
 	end)
 	
 	cc.msgHandler:connectToLogin()
@@ -445,10 +445,10 @@ function LoginScene:onPL_PHONE_SC_USERLOGIN_ACK_P(event)
 			app.sceneSwitcher:enterScene("HallScene")
 		end
 	elseif ret == 1 then
-		app.msgBox.showMsgBox("账号已经登录!")
+		app.msgBox.showMsgBox("Account logged in")
 	else
 		
-		app.msgBox.showMsgBox("系统繁忙!")
+		app.msgBox.showMsgBox("System busy!")
 	end
 	
 	if ret ~= 0 then
@@ -481,7 +481,7 @@ function LoginScene:registerKey()
 				local function funcOk()
 					cc.Director:getInstance():endToLua()
 				end
-				app.msgBox.showMsgBoxTwoBtn("是否退出应用？", funcOk)
+				app.msgBox.showMsgBoxTwoBtn("Exit game?", funcOk)
 			end
 		end
 	end

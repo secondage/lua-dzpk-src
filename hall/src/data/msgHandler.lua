@@ -90,13 +90,13 @@ function MsgHandler:connect(stage)
                 end
                 if not cc.dataMgr.isRoomBackToHall and not cc.dataMgr.bHallShowChannel then
                     app.holdOn.hide()
-                    app.msgBox.showMsgBoxEx({strMsg = "连接已断开!", funcOk = clickOK, isHideX = true})
+                    app.msgBox.showMsgBoxEx({strMsg = "Disconnect!", funcOk = clickOK, isHideX = true})
                 end
             end
         elseif __event.socket == self.socketLobby then
             if not cc.dataMgr.isChangeAccLogin and not cc.dataMgr.isRoomBackToHall then
                 app.holdOn.hide()
-                app.holdOn.show("连接已断开,正在重连")
+                app.holdOn.show("Disconnect, re-connect")
 
                 self:disconnectFromGame()
                
@@ -160,7 +160,7 @@ function MsgHandler:connect(stage)
                 app.sceneSwitcher:enterScene("LoginScene")
             end
 
-            app.msgBox.showMsgBoxEx({strMsg = "连接已断开,请重新登录!", funcOk = clickOK, isHideX = true})
+            app.msgBox.showMsgBoxEx({strMsg = "Disconnect, please login!", funcOk = clickOK, isHideX = true})
         end
 
         --手机注册
@@ -228,7 +228,7 @@ function MsgHandler:connect(stage)
                 self:connectToLobby(ack.strIP, ack.wPort)
             else
                 app.holdOn.hide()
-                app.toast.show("登录失败" ..ack.loginRet)
+                app.toast.show("Login failed." ..ack.loginRet)
                 cc.dataMgr.guestLogin = false
             end
         end
@@ -483,7 +483,7 @@ function MsgHandler:connect(stage)
             --dump(ack)
             if #ack.vList ~= 0 then
                 print("cc.dataMgr.isBroken")
-                app.holdOn.show("正在进入桌子...")
+                app.holdOn.show("Waiting for enter table...")
                 cc.dataMgr.isBroken = true
                 cc.dataMgr.selectServerID = ack.vList[1].srvId
                 cc.dataMgr.selectRoomID = ack.vList[1].roomId

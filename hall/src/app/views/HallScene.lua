@@ -20,15 +20,15 @@ local function _procBigNumber(num)
     if num <= 100000 then
         return tostring(num)
     elseif num <= 1000000 then
-        local _b = num / 10000
-        local s = string.format("%.2f万", _b)
+        local _b = num / 1000
+        local s = string.format("%.2fK", _b)
         return s
     elseif num <= 100000000 then
-        local _b = math.floor(num / 10000)
-        return _b .. "万"
+        local _b = math.floor(num / 1000)
+        return _b .. "K"
     else
-        local _b = math.floor(num / 100000000)
-        local s = string.format("%.2f亿", _b)
+        local _b = math.floor(num / 1000000)
+        local s = string.format("%.2fM", _b)
         return s
     end
 end
@@ -442,7 +442,7 @@ local function listenConnectEvent(self)
 
 		print("#cc.dataMgr.gameList.vecGameInfo = " ..#cc.dataMgr.gameList.vecGameInfo)
 		if cc.dataMgr.isBroken then --断线重连
-			app.holdOn.show("正在获取房间内信息...", 0, self)
+			app.holdOn.show("Geting Room Info...", 0, self)
 			for i = 0, #cc.dataMgr.gameList.vecGameInfo - 1 do
 				local v = cc.dataMgr.gameList.vecGameInfo[i + 1]
 				if  cc.dataMgr.selectServerID == v.svrInfo.srvID then
@@ -836,11 +836,11 @@ function HallScene:onEnterTransitionFinish_()
 		end
 		cc.dataMgr.isReLogin = false
 		cc.dataMgr.bFirstLogin = false
-		app.holdOn.showEx("正在登录...", {
+		app.holdOn.showEx("Loging...", {
 			delayTime = 0,
 			parent = self,
 			listener = function()
-				app.msgBox.showMsgBoxEx({strMsg = "连接失败,请检查网络是否连接", funcOk = function()
+				app.msgBox.showMsgBoxEx({strMsg = "Connect failed,check network setup", funcOk = function()
 					app.sceneSwitcher:enterScene("LoginScene")
 				end, isHideX = true})
 			end
@@ -907,7 +907,7 @@ function HallScene:registerKey()
 					cc.dataMgr.isChangeAccLogin = true
 					app.sceneSwitcher:enterScene("LoginScene")
 				end
-				app.msgBox.showMsgBoxTwoBtn("是否退出到登录界面", onButtonClicked)
+				app.msgBox.showMsgBoxTwoBtn("Back to Main menu?", onButtonClicked)
 			end
 		end
 	end
