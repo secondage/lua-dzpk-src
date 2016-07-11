@@ -102,7 +102,7 @@ function IndividualLayer:fillDataToUI()
         else
             strVip = userData.vipLevel.."Lv"
         end
-    endexpire
+    end
     labelVip:setString(strVip)
     local nextLevel = userData.honorLevel + 1
     if nextLevel > 18 then nextLevel = 18 end
