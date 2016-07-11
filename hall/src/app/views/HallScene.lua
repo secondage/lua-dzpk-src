@@ -21,14 +21,14 @@ local function _procBigNumber(num)
         return tostring(num)
     elseif num <= 1000000 then
         local _b = num / 1000
-        local s = string.format("%.2fK", _b)
+        local s = string.format("%.2f万", _b)
         return s
     elseif num <= 100000000 then
         local _b = math.floor(num / 1000)
-        return _b .. "K"
+        return _b .. "万"
     else
         local _b = math.floor(num / 1000000)
-        local s = string.format("%.2fM", _b)
+        local s = string.format("%.2f亿", _b)
         return s
     end
 end

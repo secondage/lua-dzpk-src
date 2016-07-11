@@ -318,7 +318,7 @@ function BenefitTaskLayer:initTaskItem(index, taskInfo, bLocked, keywords)
             local p = require(game.gameName..".src.CustomLayer").new()
             app.hallScene:hideAllPopLayers()
             if p:playCustomEvent(game.gameId) == 1 then
-                app.holdOn.show("正在获取房间列表信息...", 0.5)
+                app.holdOn.show("Waiting for room list...", 0.5)
             end
         elseif type == 2 then
             if targetPlatform ~= cc.PLATFORM_OS_WINDOWS then
