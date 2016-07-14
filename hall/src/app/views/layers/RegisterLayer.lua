@@ -43,10 +43,10 @@ end
 
 local function procUI(self)
 	self.infoInputLayer = self.registerLayer:getChildByName("Panel_infoInputLayer")
-	self.ptRegLayer = self.infoInputLayer:getChildByName("Panel_putongzhuce"):hide()
-	self.phoneRegLayer1 = self.infoInputLayer:getChildByName("Panel_shoujizhuce1"):show()
-	self.phoneRegLayer2 = self.infoInputLayer:getChildByName("Panel_shoujizhuce2"):hide()
-
+	self.ptRegLayer = self.infoInputLayer:getChildByName("Panel_putongzhuce")--:hide()
+	--self.phoneRegLayer1 = self.infoInputLayer:getChildByName("Panel_shoujizhuce1"):show()
+	--self.phoneRegLayer2 = self.infoInputLayer:getChildByName("Panel_shoujizhuce2"):hide()
+	--[[
 	local checkBoxPt = self.infoInputLayer:getChildByName("CheckBox_ptreg"):hide()
 	checkBoxPt:setSelected(false)
 	checkBoxPt:setEnabled(true)
@@ -80,7 +80,7 @@ local function procUI(self)
 	end
 	checkBoxPt:addEventListener(setSelected)
 	checkBoxPhone:addEventListener(setSelected)
-
+	]]
 	local imgbg = self.infoInputLayer:getChildByName("Image_dikuang")
 	imgbg:setTouchEnabled(true)
 
@@ -98,8 +98,8 @@ local function procUI(self)
 	btnBack:addTouchEventListener(onBtnBack)
 
 	self:procPtLayer()
-	self:procPhonePayer()
-	self:procPhonePayer_2()
+	--self:procPhonePayer()
+	--self:procPhonePayer_2()
 end
 
 function RegisterLayerCtrller:procPhonePayer_2()
@@ -233,16 +233,16 @@ function RegisterLayerCtrller:procPhonePayer()
 end
 
 function RegisterLayerCtrller:procPtLayer()
-	local txtAccInputTmp = self.ptRegLayer:getChildByName("TextField_inputAccount"):hide()
-	txtAccInput = app.EditBoxFactory:createEditBoxByImage(txtAccInputTmp, "请输入用户名")
+	local txtAccInputTmp = self.ptRegLayer:getChildByName("TextField_inputAccount")
+	txtAccInput = app.EditBoxFactory:createEditBoxByImage(txtAccInputTmp, "Please input account")
 	self.txtAccInput = txtAccInput
 
 	local txtNickNameInputTmp = self.ptRegLayer:getChildByName("TextField_inputNickName"):hide()
-	txtNickNameInput = app.EditBoxFactory:createEditBoxByImage(txtNickNameInputTmp, "请输入昵称")
+	txtNickNameInput = app.EditBoxFactory:createEditBoxByImage(txtNickNameInputTmp, "Please input nickname")
 	self.txtNickNameInput = txtNickNameInput
 
 	local txtPwdInputTmp = self.ptRegLayer:getChildByName("TextField_inputPwd")
-	txtPwdInput = app.EditBoxFactory:createEditBoxByImage(txtPwdInputTmp, "请输入密码")
+	txtPwdInput = app.EditBoxFactory:createEditBoxByImage(txtPwdInputTmp, "Please input password")
 	self.txtPwdInput = txtPwdInput
 	txtPwdInput:setInputFlag(0)
 	txtPwdInput:registerScriptEditBoxHandler(function(name, sender)
@@ -444,7 +444,7 @@ function RegisterLayerCtrller:onLC_PHONECODE_REG_ACK_P(event)
 end
 
 function RegisterLayerCtrller:createLayer()
-	self.registerLayer = cc.CSLoader:createNode("Layers/RegisterLayer.csb")
+	self.registerLayer = cc.CSLoader:createNode("LoginScene/RegisterLayer.csb")
 
 	self.regType = 0 -- 0为手机 1 为普通
 
