@@ -8,7 +8,11 @@ cc.FileUtils:getInstance():addSearchPath("res/")
 cc.FileUtils:getInstance():addSearchPath("src/")
 cc.FileUtils:getInstance():addSearchPath("src/hall/res")
 cc.FileUtils:getInstance():addSearchPath("src/hall/src")
+
 cc.FileUtils:getInstance():addSearchPath("src/hall/res/hall")
+cc.FileUtils:getInstance():addSearchPath("src/hall/res/projui")
+
+--cc.FileUtils:getInstance():addSearchPath("src/hall/res/hall")
 --cc.FileUtils:getInstance():addSearchPath("src/hall/res/Mahj")
 
 cc.FileUtils:getInstance():addSearchPath(g_writablePath .."/update", true)
@@ -19,7 +23,7 @@ cc.FileUtils:getInstance():addSearchPath(g_writablePath .."/update/hall/res/hall
 
 require "config"
 require "cocos.init"
-
+ 
 g_Platform_Ios = false
 g_Platform_Android = false
 g_Platform_Win32 = false

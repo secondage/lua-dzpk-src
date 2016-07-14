@@ -2,7 +2,7 @@ require "data.protocolPublic"
 
 local LoginScene = class("LoginScene", cc.load("mvc").ViewBase)
 
-LoginScene.RESOURCE_FILENAME = "hall/MainScene.csb"
+LoginScene.RESOURCE_FILENAME = "LoginScene/LoginScene.csb"
 
 local inputLimit = require("app.func.InputUtil")
 local animationUtils = require("app.func.AnimationUtils")
@@ -23,19 +23,19 @@ function LoginScene:onCreate()
 
 	app.runningScene = self
 
-	local imgLogo = self:getResourceNode():getChildByName("Panel_1"):hide()
+	--local imgLogo = self:getResourceNode():getChildByName("Panel_1"):hide()
 	
 	
-	local layDengLuZhuChe = self:getResourceNode():getChildByName("Node_dengluzhuce"):hide()
-	self.layDengLuZhuChe = layDengLuZhuChe
+	--local layDengLuZhuChe = self:getResourceNode():getChildByName("Node_dengluzhuce"):hide()
+	--self.layDengLuZhuChe = layDengLuZhuChe
 
 	local nodeAccInfo = self:getResourceNode():getChildByName("Node_accInfo"):hide()
 	self.nodeAccInfo = nodeAccInfo
-	local posNodeAccInfo = nodeAccInfo:getPosition()
-	check = nodeAccInfo:getChildByName("CheckBoxRem"):hide()
-	local btnLogin = layDengLuZhuChe:getChildByName("Button_login")
+	--local posNodeAccInfo = nodeAccInfo:getPosition()
+	--check = nodeAccInfo:getChildByName("CheckBoxRem"):hide()
+	local btnLogin = nodeAccInfo:getChildByName("Button_login")
 	self.btnLogin = btnLogin
-	local btnReg = layDengLuZhuChe:getChildByName("Button_btnReg")
+	local btnReg = nodeAccInfo:getChildByName("Button_btnReg")
 	self.btnReg = btnReg
 
 	self.registerLayer = nil
@@ -49,7 +49,7 @@ function LoginScene:onCreate()
 
 			app.popLayer.showEx(self.registerLayer:getChildByName("Panel_infoInputLayer"))
 			self.registerLayer:show()
-			layDengLuZhuChe:getChildByName("Button_back"):hide()
+			--layDengLuZhuChe:getChildByName("Button_back"):hide()
 			self.flag = 2
 		end
 	end)
@@ -57,7 +57,7 @@ function LoginScene:onCreate()
 	btnLogin:setPressedActionEnabled(true)
 	btnReg:setPressedActionEnabled(true)
 
-
+	--[[
 	local layType = self:getResourceNode():getChildByName("Panel_2")
 	self.layType = layType
 	local btnFengLeiLogin = layType:getChildByName("Button_fengleihao"):hide()
@@ -98,13 +98,14 @@ function LoginScene:onCreate()
 			self:reqGuestLogin()
 		end
 	end)
+--]]
 
 
 	self.username = cc.UserDefault:getInstance():getStringForKey("username", "")
 	self.password = cc.UserDefault:getInstance():getStringForKey("password", "")
 
-	local check = nodeAccInfo:getChildByName("CheckBoxRem")
-	check:setSelected(true)
+	--local check = nodeAccInfo:getChildByName("CheckBoxRem")
+	--check:setSelected(true)
 	
 	local accountInputTmp = nodeAccInfo:getChildByName("TextField_tfAcc"):hide()
 	--local accountInputBg = nodeAccInfo:getChildByName("Image_accbg"):getChildByName("Image_3"):hide()
@@ -152,9 +153,9 @@ function LoginScene:onCreate()
 		pwdInput:setString("********")	
 	end
 
-	self:registerKey()
+	--self:registerKey()
 
-	require("app.views.Test").new():addTo(self)
+	--require("app.views.Test").new():addTo(self)
 
 	-- 清理原有游戏对象
 	for k,v in pairs(cc.dataMgr.hallClearObj) do
@@ -322,14 +323,9 @@ function LoginScene:onPL_PHONE_LC_LOGIN_ACK_P(event)
 	if event.data.loginRet == wnet.ELoginResult.ELOGIN_RESULT_OK then
 		--save account
 		local nodeAccInfo = self:getResourceNode():getChildByName("Node_accInfo")
-		local check = nodeAccInfo:getChildByName("CheckBoxRem")
-		if check:isSelected() == true then
-			cc.UserDefault:getInstance():setStringForKey("username", self.username)
-			cc.UserDefault:getInstance():setStringForKey("password", self.password)
-		else
-			cc.UserDefault:getInstance():setStringForKey("username", "")
-			cc.UserDefault:getInstance():setStringForKey("password", "")
-		end
+		cc.UserDefault:getInstance():setStringForKey("username", self.username)
+		cc.UserDefault:getInstance():setStringForKey("password", self.password)
+
 		cc.msgHandler:connectToLobby()
 	else
 		pickBtn(self.btnLogin)
@@ -381,6 +377,8 @@ function LoginScene:onLOGIN_SRV_CONNECTED()
 	app.holdOn.hide()
 	print("<----1111111111onLOGIN_SRV_CONNECTED")
 
+	self.nodeAccInfo:show()
+
 	--[[local callfunc = cc.CallFunc:create(function()
 		print("<----auto")
 		if self.isautologin and cc.dataMgr.isChangeAccLogin == false then	
@@ -393,11 +391,11 @@ function LoginScene:onLOGIN_SRV_CONNECTED()
 		end
 	end)]]
 	
-	local layType = self:getResourceNode():getChildByName("Panel_2")
+	--local layType = self:getResourceNode():getChildByName("Panel_2")
 	--layType:getChildByName("Button_fengleihao"):show()
 	--layType:getChildByName("Button_youke"):hide()
 
-	local imgLogo = self:getResourceNode():getChildByName("Panel_1"):hide()
+	--local imgLogo = self:getResourceNode():getChildByName("Panel_1"):hide()
 	--[[
 	local action = cc.CSLoader:createTimeline("hall/MainScene.csb")
 	self:runAction(action)

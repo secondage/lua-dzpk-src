@@ -10,6 +10,18 @@ local function procUI(self)
 
 	self.panelRoot = self.settingLayer:getChildByName("Panel_root")
 	local panelRoot = self.panelRoot
+
+
+	panelRoot:getChildByName("Text_1"):setString("Music: ")
+	panelRoot:getChildByName("Text_1_0"):setString("Effect: ")
+	panelRoot:getChildByName("Text_13"):hide()
+	panelRoot:getChildByName("Text_versionCode"):hide()
+	panelRoot:getChildByName("Text_shock"):hide()
+	panelRoot:getChildByName("CheckBox_shock"):hide()
+	
+	
+
+
 	--音乐
 	local sliderMusic = panelRoot:getChildByName("Slider_music")
 	local checkBoxMusic = panelRoot:getChildByName("CheckBox_music")

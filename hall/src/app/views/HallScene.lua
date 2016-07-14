@@ -42,6 +42,7 @@ local function updateUserInfo(self)
 	self.imgAvatar:loadTexture(fn, ccui.TextureResType.localType)
 	local vipLevel = userData.vipLevel
 	print("vipLevel = " ..vipLevel)
+	--[[
 	if vipLevel <= 0 then
 		local strImgPath = "Resources/newResources/Vip/touxiangkuang-hui.png"
 		print("strImgPath"..strImgPath)
@@ -63,6 +64,7 @@ local function updateUserInfo(self)
 		self.lableVipLevelDisabled:setVisible(false)
 		cc.dataMgr.bVip = true
 	end
+	]]
 end
 
 local function procUserInfo(self)
@@ -76,12 +78,13 @@ local function procUserInfo(self)
 	--头像
 	local layAvatar = nodeUserInfo:getChildByName("ImageAvatarBG")
 	self.imgAvatar = layAvatar:getChildByName("ImageAvatar")
-	self.imgAvatarBorder = layAvatar:getChildByName("Image_avatarBorder")
-	self.imgVipStateEnabled = layAvatar:getChildByName("Image_vipState_enabled")
-	self.imgVipStateDisabled = layAvatar:getChildByName("Image_vipState_disabled")
-	self.lableVipLevelEnabled = layAvatar:getChildByName("BitmapFontLabel_vipLevel_enabled")
-	self.lableVipLevelDisabled = layAvatar:getChildByName("BitmapFontLabel_vipLevel_disabled")
-
+	--[[
+	self.imgAvatarBorder = layAvatar:getChildByName("Image_avatarBorder"):removeSelf()
+	self.imgVipStateEnabled = layAvatar:getChildByName("Image_vipState_enabled"):removeSelf()
+	self.imgVipStateDisabled = layAvatar:getChildByName("Image_vipState_disabled"):removeSelf()
+	self.lableVipLevelEnabled = layAvatar:getChildByName("BitmapFontLabel_vipLevel_enabled"):removeSelf()
+	self.lableVipLevelDisabled = layAvatar:getChildByName("BitmapFontLabel_vipLevel_disabled"):removeSelf()
+	]]
 --[[
 	local _img = nodeUserInfo:getChildByName("ImageAvatarBG"):getChildByName("ImageAvatar")
 	self.imgAvatar = _img:clone()
@@ -196,6 +199,23 @@ end
 
 local function procBtns(self)
 	local nodeBtns = self:getResourceNode():getChildByName("Node_btns")--:hide()
+
+	local btnSet = nodeBtns:getChildByName("Button_btnSet")
+	btnSet:setPressedActionEnabled(true)
+	btnSet:addTouchEventListener(function(obj, type)
+		if type == 2 then
+			app.audioPlayer:playClickBtnEffect()
+			if self.settinglayer == nil  then
+				self.settinglayer, self.settinglayerCtrl = createLayer("SettingLayer")
+				self.settinglayer:addTo(self, 20):hide()
+			end
+			app.popLayer.showEx(self.settinglayer:getChildByName("Panel_root"))
+			self.settinglayer:setVisible(true)
+			self.nPopLayers = self.nPopLayers + 1
+
+		end
+	end)
+	---[[
 	self.upBtns = {}
 	self.downBtns = {}
 
@@ -433,6 +453,7 @@ local function procBtns(self)
 	--隐藏按钮
 	print("hide all the buttons")
 	hideAllBtns(self)
+	--]]
 end
 
 local function listenConnectEvent(self)
@@ -745,6 +766,20 @@ function HallScene:onCreate()
 	self.name = "HallScene"
 	app.runningScene = self
 
+
+	local nodeUserInfo = self:getResourceNode():getChildByName("Node_userInfo")
+	self.labelNickName = nodeUserInfo:getChildByName("Text_nicekName")
+	self.labelBean = nodeUserInfo:getChildByName("BitmapFontLabel_bean")
+
+	--头像
+	local layAvatar = nodeUserInfo:getChildByName("ImageAvatarBG")
+	self.imgAvatar = layAvatar:getChildByName("ImageAvatar")
+	self.imgAvatarBorder = layAvatar:getChildByName("Image_avatarBorder"):removeSelf()
+	self.imgVipStateEnabled = layAvatar:getChildByName("Image_vipState_enabled"):removeSelf()
+	self.imgVipStateDisabled = layAvatar:getChildByName("Image_vipState_disabled"):removeSelf()
+	self.lableVipLevelEnabled = layAvatar:getChildByName("BitmapFontLabel_vipLevel_enabled"):removeSelf()
+	self.lableVipLevelDisabled = layAvatar:getChildByName("BitmapFontLabel_vipLevel_disabled"):removeSelf()
+
 	self.inGameListUI = 1 --在选择游戏界面1 在选择房间界面为2
 
 	self.bInitView = false
@@ -752,7 +787,7 @@ function HallScene:onCreate()
    	procBtns(self)
 
    	if cc.dataMgr.isCommonLogin then
-		self:initView()
+		--self:initView()
 	end
 
 	listenConnectEvent(self)
@@ -849,7 +884,7 @@ function HallScene:onEnterTransitionFinish_()
 		local loginViewCtrller = require("app.ViewController.LoginViewCtrller").new()
 		loginViewCtrller:startConnect()
 	else
-		--self:initView()
+		self:initView()
 	end
 
 	if not bGuiderFlag then

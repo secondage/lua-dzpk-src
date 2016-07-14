@@ -228,7 +228,7 @@ local function createRooms(self, channelProtopyte, data)
 		print("v.gameInfo.chanelName = " ..v.gameInfo.chanelName)
 		local channelRes = getChannelRes_(v.gameInfo.chanelName)
 		print("channelRes = " ..channelRes)
-		channelClone:loadTexture(channelRes, 1)
+		channelClone:loadTexture(channelRes)
 
 		--dump(v)
 		local vr = v.rmInfo
