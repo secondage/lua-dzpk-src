@@ -22,13 +22,9 @@ local EFFECT_CLICKBTN = path .."clickbtn" ..soundType
 local MUSIC_HALL = path .."hallmusic" ..soundType
 
 function audioPlayer:preloadAllGameMusic()--所有手机上安装的小游戏
-	local gamedb = require("app.func.GameDB")
-	local gameInfo = gamedb.readGameInfo()
-	 for i = 1, #gameInfo do
-    	local game = gameInfo[i]
 
-		self:preloadMusic(game.gameName .."/res/gamingmusic" ..soundType)
-    end
+
+    self:preloadMusic("dzpk".."/res/gamingmusic" ..soundType)
 end
 
 function audioPlayer:playGamingMusic()

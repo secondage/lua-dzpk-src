@@ -12,12 +12,7 @@ local function procUI(self)
 	local panelRoot = self.panelRoot
 
 
-	panelRoot:getChildByName("Text_1"):setString("Music: ")
-	panelRoot:getChildByName("Text_1_0"):setString("Effect: ")
-	panelRoot:getChildByName("Text_13"):hide()
-	panelRoot:getChildByName("Text_versionCode"):hide()
-	panelRoot:getChildByName("Text_shock"):hide()
-	panelRoot:getChildByName("CheckBox_shock"):hide()
+
 	
 	
 
@@ -101,7 +96,7 @@ local function procUI(self)
 		cc.UserDefault:getInstance():setFloatForKey("effectVolume", effectVolume)
 		sliderEffect:setPercent(effectVolume * 100)
 	end)
-
+	--[[
 	--震动
 	local checkBoxShock = panelRoot:getChildByName("CheckBox_shock")
 	--local txtShockState = panelRoot:getChildByName("Text_shock_state")
@@ -114,7 +109,7 @@ local function procUI(self)
 	local isShock = cc.UserDefault:getInstance():getBoolForKey("isShock", false)
 	checkBoxShock:setSelected(isShock)
 	--txtShockState:setString(isShock and "开" or "关")
-
+	--]]
 	--切换账号
 	local btnSwitchAccount =panelRoot:getChildByName("Button_switchAccount")
 	btnSwitchAccount:setPressedActionEnabled(true)
@@ -158,29 +153,7 @@ local function procUI(self)
 		end
 	end)
 
-	--更新按钮
-	local btnUpdate = panelRoot:getChildByName("Button_update")
-	btnUpdate:setPressedActionEnabled(true)
-	btnUpdate:hide()
-	btnUpdate:addTouchEventListener(function (obj, type)
-		if type == 2 then
-
-		end
-	end)
-
-	--版本号显示
-	local function setVersionCode()
-		local txtVersionCode = panelRoot:getChildByName("Text_versionCode")
-		local targetPlatform = cc.Application:getInstance():getTargetPlatform()
-		if targetPlatform ~= cc.PLATFORM_OS_WINDOWS then
-			local bridge = require("app.func.Bridge")
-			local ret = bridge.getAppInfo()
-			if ret ~= nil then
-				txtVersionCode:setString(ret.app_version .."." ..ret.app_build)
-			end
-		end
-	end
-	setVersionCode()
+	
 
 	--账号相关
 	local txtNickName = panelRoot:getChildByName("Text_userNickName")
@@ -188,21 +161,6 @@ local function procUI(self)
 	txtNickName:setString(nickName)
 
 
-	local strPhone = panelRoot:getChildByName("Text_versionCode_0")
-	strPhone:setString("4008-167-667"):hide()
-
-	panelRoot:getChildByName("Text_13_0"):hide()
-
-	local btnPhone = panelRoot:getChildByName("Button_Phone"):hide()
-	btnPhone:setPressedActionEnabled(true)
-	btnPhone:addTouchEventListener(function (obj, type)
-		if type == 2 then
-			if not g_Platform_Win32 then
-				local bridge = require("app.func.Bridge")
-				bridge.callPhone(strPhone:getString())
-			end
-		end
-	end)
 
 	local txtNameBg = panelRoot:getChildByName("Image_5")
 
@@ -218,7 +176,7 @@ local function procUI(self)
 end
 
 function SetttingCtrlLayer:createLayer()
-	self.settingLayer = cc.CSLoader:createNode("Layers/SettingLayer.csb")
+	self.settingLayer = cc.CSLoader:createNode("SetupLayer/SettingLayer.csb")
 	procUI(self)
 
 	self.settingLayer:onNodeEvent("exit", function()

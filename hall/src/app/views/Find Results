@@ -1,0 +1,47 @@
+Searching 254 files for "fanye_zuo1.png"
+
+/Users/chenshao/Documents/Cocos/LuaHallUI/cocosstudio/Layers/GameListLayer.csd:
+  105              <PrePosition X="0.0352" Y="0.4500" />
+  106              <PreSize X="0.0220" Y="0.0828" />
+  107:             <FileData Type="Normal" Path="Resources/newResources/HallScene/fanye_zuo1.png" Plist="HallBigTexture.plist" />
+  108            </AbstractNodeData>
+  109            <AbstractNodeData Name="Image_right" ActionTag="-1844263639" Tag="74" IconVisible="False" LeftMargin="1087.5002" RightMargin="23.4998" TopMargin="321.4996" BottomMargin="265.5004" FlipX="True" Scale9Width="25" Scale9Height="53" ctype="ImageViewObjectData">
+  ...
+  115              <PrePosition X="0.9683" Y="0.4563" />
+  116              <PreSize X="0.0220" Y="0.0828" />
+  117:             <FileData Type="Normal" Path="Resources/newResources/HallScene/fanye_zuo1.png" Plist="HallBigTexture.plist" />
+  118            </AbstractNodeData>
+  119          </Children>
+
+2 matches in 1 file
+
+
+Searching 456 files for "正在加入桌子"
+
+/Users/chenshao/Documents/Cocos/LuaCCMJ/src/dzpk/src/SetBetLayer.lua:
+  146  function SetBetLayer:sendEnterSeat()
+  147      cc.dataMgr.tableBetInfoInRoom[self.tableID + 1] = cc.dataMgr.castMultSet.beiShuInfo.nBet
+  148:     cc.showLoading("正在加入桌子")
+  149      cc.lobbyController:sendLoginTableReq(self.tableID, self.chairID)
+  150  end
+
+/Users/chenshao/Documents/Cocos/LuaCCMJ/src/hall/src/app/views/RoomScene.lua:
+  192  	
+  193  	if cc.dataMgr.isBroken then
+  194: 		app.holdOn.show("正在加入桌子...", 0.5, self:getResourceNode())
+  195  	end
+  196  end
+  ...
+  390  
+  391  local function enterTableReq(tableId, chairId, strPwd)
+  392: 	cc.showLoading("正在加入桌子")
+  393  	cc.lobbyController:sendLoginTableReq(tableId - 1, chairId - 1, strPwd)
+  394  end
+  ...
+  954  			--print"点击了一下座位，底注消息还未接受"
+  955  		else
+  956: 			cc.showLoading("Waiting...")
+  957  			cc.lobbyController:sendLoginTableReq(data.tableId, data.chairId)
+  958  		end
+
+4 matches across 2 files

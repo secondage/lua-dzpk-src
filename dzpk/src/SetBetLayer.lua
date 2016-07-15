@@ -145,7 +145,7 @@ end
 
 function SetBetLayer:sendEnterSeat()
     cc.dataMgr.tableBetInfoInRoom[self.tableID + 1] = cc.dataMgr.castMultSet.beiShuInfo.nBet
-    cc.showLoading("正在加入桌子")
+    cc.showLoading("Waiting...")
     cc.lobbyController:sendLoginTableReq(self.tableID, self.chairID)
 end
 return SetBetLayer

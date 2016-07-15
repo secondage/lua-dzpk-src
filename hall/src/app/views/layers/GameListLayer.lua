@@ -160,7 +160,7 @@ local function showSingleGame(self, gameID, gameName, index, gameName_ZH)
 	self.tblDeleteBtns[#self.tblDeleteBtns + 1] = btnDelete
 
 	if not app.isHotChecked then
-		readHotFromServer(self, gameName)
+		--readHotFromServer(self, gameName)
 	else
 		for name, _ in pairs(app.hot) do
     		self:showPaint(name)
@@ -481,6 +481,7 @@ end
 function GameListLayer:updateGameListUI()
 	self:showGameList()
 
+	--[[
 	local delayTime = cc.DelayTime:create(0.1)
 	local callfc = cc.CallFunc:create(function()
 		self.lvRooms:refreshView()
@@ -498,7 +499,7 @@ function GameListLayer:updateGameListUI()
 	end)
 	self.lvRooms:runAction(cc.Sequence:create(delayTime, callfc))
 
-
+	]]
 end
 
 function GameListLayer:getInnerPx()
@@ -512,6 +513,7 @@ end
 
 
 function GameListLayer:showGameList()
+	--[[
 	self.lvRooms = self.gameListlayer:getChildByName("ListView_3"):hide()
 	self.lvRooms:setItemsMargin(50)
 	self.lvRooms:removeAllItems()
@@ -567,7 +569,7 @@ function GameListLayer:showGameList()
 			end
 		end
 	end)
-	
+	--]]
 
     self.insertIndex = 0
    -- local gameInfo = _gamedb.readGameInfo()
@@ -585,9 +587,6 @@ function GameListLayer:showGameList()
     ]]
 
     cc.dataMgr.playingGame = "dzpk"
-    print("self.lvRooms:getChildrenCount() = " ..self.lvRooms:getChildrenCount())
-
-
     local btnEnter = ccui.Button:create("enterroomt.png", "enterroomt.png", "")
     btnEnter:setScale(0.5)
     btnEnter:setPressedActionEnabled(true)
@@ -613,7 +612,7 @@ function GameListLayer:showGameList()
     	end
     end)
 
-
+    --[[
 	self.lvRooms:insertCustomItem(btnAdd, self.insertIndex)
 	self.insertIndex = self.insertIndex + 1
 	btnAdd:getChildByName("Button_btnDelete"):hide()
@@ -640,14 +639,7 @@ function GameListLayer:showGameList()
 
 			self.lvRooms:setDirection(2)
 			bGuide = false
-			--[[
-			cc.dataMgr.guiderFlag["newbie_guide"] = false
-			cc.UserDefault:getInstance():setBoolForKey("newbie_guide", false)
-			if app.hallScene.gameListGuideLayer ~= nil then
-				app.hallScene.gameListGuideLayer.root:removeSelf()
-				app.hallScene.gameListGuideLayer = nil
-			end
-			--]]
+	
 		end
 	end
 	btnAdd:addTouchEventListener(onBtnAddEvt)
@@ -665,6 +657,7 @@ function GameListLayer:showGameList()
 			showGuide()
 		end
 	end
+	]]
 end
 
 

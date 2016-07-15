@@ -2,7 +2,7 @@ require "data.protocolPublic"
 
 local RoomScene = class("RoomScene", cc.load("mvc").ViewBase)
 
-RoomScene.RESOURCE_FILENAME = "hall/RoomScene.csb"
+RoomScene.RESOURCE_FILENAME = "RoomScene/RoomScene.csb"
 local RoomSceneEvents = {}
 RoomScene.RESOURCE_BINDING = RoomSceneEvents
 local inputUtil = require("app.func.InputUtil")
@@ -49,9 +49,9 @@ function RoomScene:onCreate()
 	end
 	
 	--任务
+	--[[]
 	self.taskLayer = app.taskLayerCtrller:createLayer():addTo(self:getResourceNode(), 10)
 	local btnTask = self:getResourceNode():getChildByName("Button_btnTask")
-	btnTask:setVisible(false)
 	btnTask:setPressedActionEnabled(true)
 	btnTask:addTouchEventListener(function(obj, type)
 		if type == 2 then
@@ -73,6 +73,7 @@ function RoomScene:onCreate()
 	if app.funcPublic.isChanllengeGame() then
 		btnTask:setVisible(false)
 	end
+	]]
 
 	self.settinglayer = nil
 	local btnSetting = self:getResourceNode():getChildByName("Button_btnSetting")
@@ -111,13 +112,13 @@ function RoomScene:onCreate()
 		end
 	end)
 
+	--[[
 	local btnFastJoin = self.roomLayer:getChildByName("Button_kuaisukaishi")
-	btnFastJoin:setVisible(false)
 	btnFastJoin:setPressedActionEnabled(true)
 	btnFastJoin:addTouchEventListener(function(obj, type)
 		if type == 2 then
 			app.audioPlayer:playClickBtnEffect()
-			app.holdOn.show("Search table...")
+			app.holdOn.show("正在查询最佳桌子...")
 			cc.lobbyController:sendFastJoinReq()
 		end
 	end)
@@ -125,6 +126,7 @@ function RoomScene:onCreate()
 	if app.funcPublic.isWrapGame() then
 		btnFastJoin:hide()
 	end
+	]]
 	--self:fillTable(cc.dataMgr.selectedGameInfo.tableNum)
 
 	if cc.dataMgr.castMultSetInfo.useCastMultSet == true then
@@ -136,7 +138,7 @@ function RoomScene:onCreate()
 	app.setBetLayerDZPK = nil
 	cc.dataMgr.tableBetInfoInRoom = {}
 
-	self:showMyLocation()
+	--self:showMyLocation()
 
 	if self:initWrapRoom() then
 		btnTask:hide()
@@ -165,7 +167,7 @@ function RoomScene:initWrapRoom()
 end
 
 function RoomScene:showMyLocation()
-	local txtMyPath = self:getResourceNode():getChildByName("Text_myPath"):hide()
+	local txtMyPath = self:getResourceNode():getChildByName("Text_myPath")
 	txtMyPath:setFontSize(15)
 	local strMyPath = ""
 	if cc.dataMgr.selectedGameInfo then
@@ -189,7 +191,7 @@ function RoomScene:onEnterTransitionFinish_()
 
 	
 	if cc.dataMgr.isBroken then
-		app.holdOn.show("Waiting for enter table...", 0.5, self:getResourceNode())
+		app.holdOn.show("Waiting...", 0.5, self:getResourceNode())
 	end
 end
 
@@ -215,14 +217,14 @@ local function _procBigNumber(num)
     if num <= 100000 then
         return tostring(num)
     elseif num <= 1000000 then
-        local _b = num / 1000
+        local _b = num / 10000
         local s = string.format("%.2f万", _b)
         return s
     elseif num <= 100000000 then
-        local _b = math.floor(num / 1000)
+        local _b = math.floor(num / 10000)
         return _b .. "万"
     else
-        local _b = math.floor(num / 1000000)
+        local _b = math.floor(num / 100000000)
         local s = string.format("%.2f亿", _b)
         return s
     end
@@ -255,9 +257,9 @@ function RoomScene:updateUserInfoUI()
 	local labelBean = layUserInfo:getChildByName("BitmapFontLabel_2")
 	labelBean:setString(_procBigNumber(cc.dataMgr.lobbyUserData.lobbyUser.gameCurrency.l))
 
-	local imgGameName = self.roomLayer:getChildByName("Image_gamename"):hide()
-	imgGameName:loadTexture(cc.dataMgr.playingGame .."/res/gamename.png")
-	print("<--" ..cc.dataMgr.playingGame .."/res/gamename.png")
+	--local imgGameName = self.roomLayer:getChildByName("Image_gamename")
+	--imgGameName:loadTexture(cc.dataMgr.playingGame .."/res/gamename.png")
+	--print("<--" ..cc.dataMgr.playingGame .."/res/gamename.png")
 end
 
 function RoomScene:procTableList()
@@ -387,7 +389,7 @@ function RoomScene:dealWapRoomChair(imgTable)
 end
 
 local function enterTableReq(tableId, chairId, strPwd)
-	cc.showLoading("Waiting for enter table")
+	cc.showLoading("Waiting...")
 	cc.lobbyController:sendLoginTableReq(tableId - 1, chairId - 1, strPwd)
 end
 
@@ -406,7 +408,7 @@ function RoomScene:showPwdInputMsg(imgChair)
 				enterTableReq(tableId, chairId, inputText)
 			end
 
-			inputMsg.show({text = "Password:", holdText = "Password", funcOK = btnOKEvt})
+			inputMsg.show({text = "请输入密码:", holdText = "请输入密码", funcOK = btnOKEvt})
 
 			return true
 		end
@@ -459,11 +461,11 @@ function RoomScene:fillTable(count)
 						end
 					end
 
-					print("cc.dataMgr.castMultSet.beiShuInfo.gameCurrencyLimit = " ..cc.dataMgr.castMultSet.beiShuInfo.gameCurrencyLimit)
+					print("cc.dataMgr.playingGame = " ..cc.dataMgr.playingGame)
 					if cc.dataMgr.playingGame == "dzpk" --then
 							and (cc.dataMgr.tableBetInfoInRoom[object.tableID] == nil or cc.dataMgr.tableBetInfoInRoom[object.tableID] == 0)
 						and cc.dataMgr.castMultSet and cc.dataMgr.castMultSet.beiShuInfo
-							and (cc.dataMgr.castMultSet.beiShuInfo.gameCurrencyLimit == 0 or cc.dataMgr.castMultSet.beiShuInfo.gameCurrencyLimit == 1) then
+							and cc.dataMgr.castMultSet.beiShuInfo.gameCurrencyLimit == 0 then
 						app.setBetLayerDZPK = require("dzpk.src.SetBetLayer").new()
 						app.setBetLayerDZPK:createSetBetLayer(self:getResourceNode())
 						app.setBetLayerDZPK:showSetBetUI()
@@ -495,10 +497,10 @@ function RoomScene:fillTable(count)
 						else
 
 							if not self:showPwdInputMsg(object) then
-								enterTableReq(object.tableID, object.chairID)
+								--enterTableReq(object.tableID, object.chairID)
 							end	
 						end
-						--]]
+						]]
 					end
 				end)
 				coroutine.resume(self.co)
@@ -850,41 +852,41 @@ function RoomScene:onGC_ENTERTABLE_ACK_P(event)
 		app.sceneSwitcher:enterScene("GameScene")
 		--app.toast.show("手机玩家不支持旁观")
 	elseif ret == wnet.EnterTable_Result.EnterTable_BeOccupyeed then
-		app.toast.show("The position has been to sit")
+		app.toast.show("该位置已经有人先坐了")
 	elseif ret == wnet.EnterTable_Result.EnterTable_MoneyLimit then
-		app.toast.show("Don't have enough chips")
+		app.toast.show("游戏豆不足")
 	elseif ret == wnet.EnterTable_Result.EnterTable_WrongPasswd then
-		app.toast.show("Password wrong")
+		app.toast.show("密码错误")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidMinWin then
-		app.toast.show("min win")
+		app.toast.show("不满足其它玩家的最小胜率要求")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidMaxDisc then
-		app.toast.show("max disc")
+		app.toast.show("不满足其它玩家的最大断线率要求")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidMaxDelay then
-		app.toast.show("max delay")
+		app.toast.show("不满足其它玩家的最大延迟要求")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidMinScore then
-		app.toast.show("min score")
+		app.toast.show("不满足最小积分或游戏豆要求")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ForbidIp then
-		app.toast.show("same ip")
+		app.toast.show("不满足其它的玩家的同ip限制要求")
 	elseif ret == wnet.EnterTable_Result.EnterTable_GameFix then
-		app.toast.show("Game fixing")
+		app.toast.show("游戏维护，暂时不能进入")
 	elseif ret == wnet.EnterTable_Result.EnterTable_Busy then
-		app.toast.show("System busy")
+		app.toast.show("未知原因")
 	elseif ret == wnet.EnterTable_Result.EnterTable_GainOver then
-		app.toast.show("Gain over today")
+		app.toast.show("输过上限， 当天不能继续游戏")
 	elseif ret == wnet.EnterTable_Result.EnterTable_NoTrail then
-		app.toast.show("Trail player")
+		app.toast.show("试玩玩家不能加入游戏豆类游戏")
 	elseif ret == wnet.EnterTable_Result.EnterTable_Gaming then
-		app.toast.show("Gameing is on air")
+		app.toast.show("游戏正在进行，不能加入")
 	elseif ret == wnet.EnterTable_Result.EnterTable_WatchNumLimit then
-		app.toast.show("Mobile player not watch")
+		app.toast.show("手机玩家不支持旁观")
 	elseif ret == wnet.EnterTable_Result.EnterTable_ScoreLimit then
-		app.toast.show("Don't have enough score")
+		app.toast.show("积分不足")
 	elseif ret == wnet.EnterTable_Result.EnterTalbe_ForbidSetCustomMinScore then
 		if event.data.minGameCurrency then
-			app.toast.show("Chips limit to" ..event.data.minGameCurrency .."so enter failed!")
+			app.toast.show("您未满足玩家最低游戏豆为" ..event.data.minGameCurrency .."限制要求,加入失败!")
 		end
 	elseif ret == wnet.EnterTable_Result.EnterTable_RoomExists then
-		app.toast.show("Room exist")
+		app.toast.show("很抱歉,房间已经存在")
 	end
 
 	if ret ~= wnet.EnterTable_Result.EnterTable_OK and ret ~= wnet.EnterTable_Result.EnterTable_OB then
@@ -951,7 +953,7 @@ function RoomScene:onGC_GETSHOWSETBETINFO_ACK_P(event)
 		if cc.dataMgr.playingGame == "dzpk" and cc.dataMgr.tableBetInfoInRoom[data.tableId + 1] == nil then
 			--print"点击了一下座位，底注消息还未接受"
 		else
-			cc.showLoading("Waiting for enter table")
+			cc.showLoading("Waiting...")
 			cc.lobbyController:sendLoginTableReq(data.tableId, data.chairId)
 		end
 	end

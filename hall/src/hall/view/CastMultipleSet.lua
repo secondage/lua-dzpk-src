@@ -105,7 +105,7 @@ function castMultipleSet:init(root,data,bShow)
 
     -- 初始化UI
     --display.loadSpriteFrames("src/hall/res/hall/Resources/diZhuSet/diZhuSetRes.plist","src/hall/res/hall/Resources/diZhuSet/diZhuSetRes.png")
-    local rmLyr = cc.CSLoader:createNode("src/hall/res/hall/Layers/DiZhuSetLayer.csb")
+    local rmLyr = cc.CSLoader:createNode("Layers/DiZhuSetLayer.csb")
     self.resLyr = rmLyr
     self.rootLyr:addChild(rmLyr)
 
@@ -157,13 +157,13 @@ function castMultipleSet:init(root,data,bShow)
         if type==2 then
             app.audioPlayer:playClickBtnEffect()
             if app.castMultSet.tmpSelectCast==nil or app.castMultSet.tmpSelectCast == cc.dataMgr.castMultSet.beiShuInfo.nBet then
-                app.msgBox.showMsgBox("底注设置成功")
+                app.msgBox.showMsgBox("Succeeful")
                 app.castMultSet.dzsPanel:setVisible(false)
             elseif cc.dataMgr.castMultSet.beiShuInfo.betInfo[app.castMultSet.tmpSelectCast]>i64_toInt(cc.dataMgr.lobbyUserData.lobbyUser.gameCurrency) then
-                app.msgBox.showMsgBox("底注超过自己游戏豆上限，请重新设置")
+                app.msgBox.showMsgBox("Bet, exceeding the maximum limit their games beans please cap again, please reset")
             else
                 app.castMultSet.listPanel:setVisible(false)
-                app.holdOn.show("底注设置请求中...")
+                app.holdOn.show("Bet setting...")
                 app.castMultSet.castMultSetLogic:sendCastSetReq(app.castMultSet.tmpSelectCast,cc.dataMgr.castMultSet.beiShuInfo.betInfo[app.castMultSet.tmpSelectCast])
             end
         end
