@@ -2,12 +2,12 @@
 -- Author: ChenShao
 -- Date: 2015-08-17 17:09:06
 --
-local ReminderPoint = require("hall.view.ReminderPoint")
+--local ReminderPoint = require("hall.view.ReminderPoint")
 local inputUtil = require("app.func.InputUtil")
 
 local HallScene = class("HallScene", cc.load("mvc").ViewBase)
 
-HallScene.RESOURCE_FILENAME = "hall/HallScene.csb"
+HallScene.RESOURCE_FILENAME = "LobbyScene/LobbyScene.csb"
 
 
 local function createLayer(layerName)
@@ -40,8 +40,8 @@ local function updateUserInfo(self)
 	local fn = "avatar/" .. userData.icon .. ".jpg"
 	print("hall:"..fn)
 	self.imgAvatar:loadTexture(fn, ccui.TextureResType.localType)
-	local vipLevel = userData.vipLevel
-	print("vipLevel = " ..vipLevel)
+	--local vipLevel = userData.vipLevel
+	--print("vipLevel = " ..vipLevel)
 	--[[
 	if vipLevel <= 0 then
 		local strImgPath = "Resources/newResources/Vip/touxiangkuang-hui.png"
@@ -72,12 +72,8 @@ local function procUserInfo(self)
 	self.nodeUserInfo = nodeUserInfo
 
 	self.labelNickName = nodeUserInfo:getChildByName("Text_nicekName")
-
 	self.labelBean = nodeUserInfo:getChildByName("BitmapFontLabel_bean")
-
-	--头像
-	local layAvatar = nodeUserInfo:getChildByName("ImageAvatarBG")
-	self.imgAvatar = layAvatar:getChildByName("ImageAvatar")
+	self.imgAvatar = nodeUserInfo:getChildByName("ImageAvatar")
 	--[[
 	self.imgAvatarBorder = layAvatar:getChildByName("Image_avatarBorder"):removeSelf()
 	self.imgVipStateEnabled = layAvatar:getChildByName("Image_vipState_enabled"):removeSelf()
@@ -190,7 +186,7 @@ end
 
 local function playEnterSceneAnimation(self)
 	--按钮出现的动画
-	playShowBtnAnimation(self)
+	--playShowBtnAnimation(self)
 	--游戏列表出现的动画
 	playShowGameListAnimation(self)
 	--暂停协议处理
@@ -215,7 +211,7 @@ local function procBtns(self)
 
 		end
 	end)
-	---[[
+	--[[
 	self.upBtns = {}
 	self.downBtns = {}
 
@@ -621,14 +617,14 @@ end
 
 function HallScene:hideNodeUserInfoUI()
 	if self.nodeUserInfo then
-		self.nodeUserInfo:getChildByName("ImageAvatarBG"):hide()
+		self.nodeUserInfo:getChildByName("ImageAvatar"):hide()
 	end
 end
 
 function HallScene:backToGameListLayer()
 	self:showGameListLayer()
 	if self.nodeUserInfo then
-		self.nodeUserInfo:getChildByName("ImageAvatarBG"):show()
+		self.nodeUserInfo:getChildByName("ImageAvatar"):show()
 	end
 	self.inGameListUI = 1
 	--[[2016.2.1 策划要求，大厅中跑马灯没有内容的时候隐藏
@@ -706,6 +702,7 @@ function HallScene:initView()
 
 	procUserInfo(self)
 
+	--[[
 	self.layIndividual = require("hall.view.IndividualLayer").new()
 	self.laySignIn = require("hall.view.SignInLayer").new()
 	self.layChangePsw = require("hall.view.ChangePswLayer").new()
@@ -716,7 +713,7 @@ function HallScene:initView()
 	self.layShop = require("hall.view.ShopLayer").new()
 	self.layBenefit = require("hall.view.BenefitLayer").new()
 	self.layVip = require("hall.view.VipLayer").new()
-
+	--]]
 	--[[2016.2.1 策划要求，大厅中跑马灯没有内容的时候隐藏
 	if app.layBulletin == nil then
 		local layBulletin = require("hall.view.BulletinLayer").new()
@@ -724,7 +721,7 @@ function HallScene:initView()
 		app.layBulletin = layBulletin
 	end
 	--]]
-
+	--[[
 	--初始化个人信息
 	self.layIndividual:init(self)
 	self.layChangePsw:init(self)
@@ -749,8 +746,8 @@ function HallScene:initView()
 
 	--初始化会员
 	self.layVip:init(self, self)
-
-	listenEvent(self)
+	]]--
+	--listenEvent(self)
 end
 
 function HallScene:onCreate()
@@ -772,13 +769,8 @@ function HallScene:onCreate()
 	self.labelBean = nodeUserInfo:getChildByName("BitmapFontLabel_bean")
 
 	--头像
-	local layAvatar = nodeUserInfo:getChildByName("ImageAvatarBG")
-	self.imgAvatar = layAvatar:getChildByName("ImageAvatar")
-	self.imgAvatarBorder = layAvatar:getChildByName("Image_avatarBorder"):removeSelf()
-	self.imgVipStateEnabled = layAvatar:getChildByName("Image_vipState_enabled"):removeSelf()
-	self.imgVipStateDisabled = layAvatar:getChildByName("Image_vipState_disabled"):removeSelf()
-	self.lableVipLevelEnabled = layAvatar:getChildByName("BitmapFontLabel_vipLevel_enabled"):removeSelf()
-	self.lableVipLevelDisabled = layAvatar:getChildByName("BitmapFontLabel_vipLevel_disabled"):removeSelf()
+	self.imgAvatar = nodeUserInfo:getChildByName("ImageAvatar")
+
 
 	self.inGameListUI = 1 --在选择游戏界面1 在选择房间界面为2
 
@@ -789,7 +781,7 @@ function HallScene:onCreate()
    	if cc.dataMgr.isCommonLogin then
 		--self:initView()
 	end
-
+	
 	listenConnectEvent(self)
 
     --选择游戏layer

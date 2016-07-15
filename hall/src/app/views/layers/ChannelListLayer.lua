@@ -206,7 +206,7 @@ local function getRoomStateRes(online)
 	end
 end
 
-local function createRooms(self, channelProtopyte, data)
+local function createRooms(self)
 	if cc.dataMgr.gameList == nil then 
 		return {} 
 	end
@@ -217,18 +217,19 @@ local function createRooms(self, channelProtopyte, data)
 
 	local channelItems = {}
 
+	local channelClone = self.channelListLayer:getChildByName("Panel_channel")
 
 	--dump(cc.dataMgr.gameList.vecGameInfo)
 	for i = 0, #cc.dataMgr.gameList.vecGameInfo - 1 do
 		local v = cc.dataMgr.gameList.vecGameInfo[i + 1]
-		local channelClone = channelProtopyte:clone()
-		channelClone:setCascadeOpacityEnabled(true)
-		channelClone:setTouchEnabled(true)
+		--local channelClone = channelProtopyte:clone()
+		--channelClone:setCascadeOpacityEnabled(true)
+		--channelClone:setTouchEnabled(true)
 
-		print("v.gameInfo.chanelName = " ..v.gameInfo.chanelName)
-		local channelRes = getChannelRes_(v.gameInfo.chanelName)
-		print("channelRes = " ..channelRes)
-		channelClone:loadTexture(channelRes)
+		--print("v.gameInfo.chanelName = " ..v.gameInfo.chanelName)
+		--local channelRes = getChannelRes_(v.gameInfo.chanelName)
+		--print("channelRes = " ..channelRes)
+		--channelClone:loadTexture(channelRes)
 
 		--dump(v)
 		local vr = v.rmInfo
@@ -236,16 +237,17 @@ local function createRooms(self, channelProtopyte, data)
 		--if #vr == 1 then 
 			local rmInfo = vr[1]
 			local onlineCount = rmInfo.userNum
-			local atlasOnlineCount = channelClone:getChildByName("AtlasLabel_zaixianrenshu")
-			atlasOnlineCount:setString(tostring(onlineCount))
+			print("onlineCount = " ..onlineCount)
+			local atlasOnlineCount = channelClone:getChildByName("Text_online_count")
+			atlasOnlineCount:setString(string.format("%d Online", onlineCount))
 
-			local atlasDifen = channelClone:getChildByName("AtlasLabel_difen")
+			local atlasDifen = channelClone:getChildByName("Text_ante")
 			atlasDifen:setString(tostring(v.gameInfo.moneyLimit.l))
 			
 			channelItems[#channelItems + 1] = channelClone
 
 			channelClone.userdata = vr
-			local layTouch = channelClone:getChildByName("Panel_touch")
+			local layTouch = channelClone:getChildByName("Button_select")
 			layTouch:addTouchEventListener(function(object, type)
 				if type == 2 then
 
@@ -461,22 +463,38 @@ function ChannelListLayer:createMenuLayer()
         updatePositionWithAnimation()
 	end
 
+	--[[
 	local listener = cc.EventListenerTouchOneByOne:create()
 	listener:registerScriptHandler(onTouchBegan, cc.Handler.EVENT_TOUCH_BEGAN)
 	listener:registerScriptHandler(onTouchMoved, cc.Handler.EVENT_TOUCH_MOVED )
 	listener:registerScriptHandler(onTouchEnded, cc.Handler.EVENT_TOUCH_ENDED )
 	local eventDispatcher = menuLayer:getEventDispatcher()
 	eventDispatcher:addEventListenerWithSceneGraphPriority(listener, touchLayer)
+	--]]
 end
 
 function ChannelListLayer:createLayer()
-	self.channelListLayer = cc.CSLoader:createNode("Layers/ChannelListLayer.csb")
+	self.channelListLayer = cc.CSLoader:createNode("LobbyScene/ChannelListLayer.csb")
 	self.isDrag = false
 	procUI(self)
 	return self.channelListLayer
 end
 
 function ChannelListLayer:updateRoomList()
+
+	
+	--[[
+	local btnEnter = channelProtopyte:getChildByName("Button_select")
+	btnEnter:addTouchEventListener(function(obj, type)
+		if type == 2 then
+
+		end
+	end)
+]]
+
+	createRooms(self)
+
+	--[[
 	reset()
 	self:createMenuLayer()
 
@@ -489,6 +507,7 @@ function ChannelListLayer:updateRoomList()
 		_menuLayer:addChild(item)
 	end
 	updatePosition(self)
+	]]
 end
 
 return ChannelListLayer

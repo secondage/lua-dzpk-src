@@ -6,24 +6,14 @@ require("app.func.Urls")
 require("init")
 
 local LoadingScene = class("LoadingScene", cc.load("mvc").ViewBase)
---LoadingScene.RESOURCE_FILENAME = "hall/LoadingScene.csb"
+LoadingScene.RESOURCE_FILENAME = "LoginScene/LoadingScene.csb"
 
-local db = require("app.func.GameDB")
+--local db = require("app.func.GameDB")
 local json = require("framework.json")
 local httpUtils = require("app.func.HttpUtils")
 
-local function loadSpriteFrames()
-	local packName = "publicui/"
-	--display.loadSpriteFrames(packName .."paintAnimation.plist", packName .."paintAnimation.png")
-	--display.loadSpriteFrames(packName .."channelUI.plist", packName .."channelUI.png")
-	--display.loadSpriteFrames("publicui/ChatExpression.plist", "publicui/ChatExpression.png")
-
-end
-
 local function enterNextStep()
 	
-	--loadSpriteFrames()
-
 	app.audioPlayer:loadAudio()
 	app.audioPlayer:playHallMusic()
 
@@ -58,10 +48,11 @@ function LoadingScene:onCreate()
 	self.name = "LoadingScene"
 	app.runningScene = self
 	
+	--[[
 	local imgbg = ccui.ImageView:create("back.jpg")
 	imgbg:addTo(self)
 	imgbg:pos(display.cx, display.cy)
-
+	--]]
  	self:readLoginIni()
 end
 
@@ -87,9 +78,9 @@ function LoadingScene:readLoginIni()
 end
 
 function LoadingScene:dealPreGames()
-	db.createTable()
+	--db.createTable()
 
-	db.addNewGame(90, "dzpk", "德州扑克", 1, 1)
+	--db.addNewGame(90, "dzpk", "德州扑克", 1, 1)
 	cc.UserDefault:getInstance():setStringForKey("dzpk_version", "1.0")
 
 end
