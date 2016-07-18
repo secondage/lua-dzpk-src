@@ -462,10 +462,12 @@ function RoomScene:fillTable(count)
 					end
 
 					print("cc.dataMgr.playingGame = " ..cc.dataMgr.playingGame)
+					print("cc.dataMgr.castMultSet.beiShuInfo.gameCurrencyLimit = " ..cc.dataMgr.castMultSet.beiShuInfo.gameCurrencyLimit)
 					if cc.dataMgr.playingGame == "dzpk" --then
 							and (cc.dataMgr.tableBetInfoInRoom[object.tableID] == nil or cc.dataMgr.tableBetInfoInRoom[object.tableID] == 0)
 						and cc.dataMgr.castMultSet and cc.dataMgr.castMultSet.beiShuInfo
-							and cc.dataMgr.castMultSet.beiShuInfo.gameCurrencyLimit == 0 then
+							and (cc.dataMgr.castMultSet.beiShuInfo.gameCurrencyLimit == 0 or 
+								cc.dataMgr.castMultSet.beiShuInfo.gameCurrencyLimit == 1) then
 						app.setBetLayerDZPK = require("dzpk.src.SetBetLayer").new()
 						app.setBetLayerDZPK:createSetBetLayer(self:getResourceNode())
 						app.setBetLayerDZPK:showSetBetUI()

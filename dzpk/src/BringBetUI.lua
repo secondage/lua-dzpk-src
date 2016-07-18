@@ -90,6 +90,13 @@ function BringBetUI:GetMaxBringBet()
 end
 
 function BringBetUI:init()
+    local layRoot = self.BringBetLayer:getChildByName("Panel_bring"):getChildByName("ProjectNode_bring")
+    layRoot:getChildByName("Text_1"):setString("Cur Bet: ")
+    layRoot:getChildByName("Text_2"):setString("Bean Left: ")
+    layRoot:getChildByName("Text_3"):setString("Min Carry: ")
+    layRoot:getChildByName("Text_4"):setString("Max Carry: ")
+
+
     self.bringBetNum = self.BringBetLayer:getChildByName("Panel_bring"):getChildByName("ProjectNode_bring"):getChildByName("Image_bring_num_bk"):getChildByName("Text_bring_bet_num")
 
     self.slider = self.BringBetLayer:getChildByName("Panel_bring"):getChildByName("ProjectNode_bring"):getChildByName("Slider_bring_bet")

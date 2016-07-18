@@ -37,6 +37,8 @@ function SetBetLayer:init()
        app.castMultipleSetLogic:sendCastSetReq(betNum, 0)
     end
 
+    local txt = imgBK:getChildByName("Text_1"):setString("Hi, Wecome to Texas Hold’em poker!")
+
     local btn10 = imgBK:getChildByName("Button_10")
     btn10:addTouchEventListener(function (obj, type)
         if type == 2 then
