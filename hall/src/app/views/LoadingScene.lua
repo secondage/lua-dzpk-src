@@ -67,13 +67,13 @@ function LoadingScene:readLoginIni()
 			local info = json.decode(response)
 
 			print("info.ip = " ..info.ip)
-			--clientConfig.serverAddress = info.ip
-			--enterNextStep()
+			clientConfig.serverAddress = info.ip
+			enterNextStep()
 		end
 	end)
 
-	clientConfig.serverAddress = "192.168.11.109"
-    enterNextStep()
+	--clientConfig.serverAddress = "192.168.11.109"
+    --enterNextStep()
 
 end
 
