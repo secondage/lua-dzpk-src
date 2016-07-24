@@ -7,7 +7,7 @@
 			<key>LoginScene/Btn_Accept.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,281},{236,58}}</string>
+				<string>{{1,402},{236,58}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -18,7 +18,7 @@
 			<key>LoginScene/Btn_Login.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,1},{278,68}}</string>
+				<string>{{75,1},{278,68}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -29,13 +29,24 @@
 			<key>LoginScene/Btn_Register.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{71,1},{278,68}}</string>
+				<string>{{145,1},{278,68}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<true />
 				<key>sourceSize</key>
 				<string>{278,68}</string>
+			</dict>
+			<key>LoginScene/shurukuang.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,1},{399,72}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{399,72}</string>
 			</dict>
 		</dict>
 		<key>metadata</key>

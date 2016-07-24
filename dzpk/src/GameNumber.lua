@@ -44,6 +44,7 @@ function GameNumber:appendMiniGameProNumber(target, startCode)
         target.protcolNameOfMiniGame[i] = name
         return i
     end
+
     target.SC_POKE_OP_REQ_P = incr(self.gameNumber[1])
     target.SC_POKE_OP_NOT_P = incr(self.gameNumber[2])
     target.SC_POKE_HAND_NOT_P = incr(self.gameNumber[3])
@@ -52,6 +53,8 @@ function GameNumber:appendMiniGameProNumber(target, startCode)
     target.SC_INIT_DATA_P = incr(self.gameNumber[6])
     target.SC_BET_P = incr(self.gameNumber[7])
     target.SC_SPLIT_BET_P = incr(self.gameNumber[8])
+
+
     return i - startCode
 end
 

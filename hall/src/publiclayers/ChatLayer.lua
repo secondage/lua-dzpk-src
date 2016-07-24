@@ -115,6 +115,7 @@ local function procUI(self)
 	end)
 	chatInput:setOpacity(0)
 	self.chatInput = chatInput
+	chatInput:hide()
 
 	local btnSend = imgChatBg:getChildByName("Button_send") --发送按钮
 	btnSend:addTouchEventListener(function(obj, type)

@@ -49,7 +49,7 @@ end
 -----------------------------------------------------
 function GameModel:setSC_POKE_OP_NOT(ack)
     self.SC_POKE_OP_NOT = ack
-    dump(ack)
+   -- dump(ack)
     local chair = S2CChair(ack.chair)
     if _gamePublic:valid_chair(chair) == true then
         app.gameLayer.eventProtocol:dispatchEvent({ name = "SC_POKE_OP_NOT", data = ack })
@@ -77,7 +77,7 @@ end
 
 function GameModel:setSC_BET(ack)
     self.SC_BET = ack
-    dump(ack)
+   -- dump(ack)
     app.gameLayer.eventProtocol:dispatchEvent({ name = "SC_BET", data = ack })
 end
 
