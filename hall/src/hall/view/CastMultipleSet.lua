@@ -316,7 +316,7 @@ function castMultipleSet:addTableSign(tableID,bet,kind)
     local sign = app.seekChildByName(table,"Image_dzs_tableSignBg")
     if sign==nil then
         sign = self.tableSignWight:clone()
-        sign:setPosition(table:getContentSize().width/2,table:getContentSize().height/2)
+        sign:setPosition(table:getContentSize().width/2,table:getContentSize().height/2 - 25)
         table:addChild(sign,100)
     end
 
