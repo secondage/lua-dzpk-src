@@ -17,6 +17,7 @@ end
 
 local function _procBigNumber(num)
     --get
+    --[[
     if num <= 100000 then
         return tostring(num)
     elseif num <= 1000000 then
@@ -31,6 +32,8 @@ local function _procBigNumber(num)
         local s = string.format("%.2f亿", _b)
         return s
     end
+    ]]
+    return num
 end
 
 local function updateUserInfo(self)
