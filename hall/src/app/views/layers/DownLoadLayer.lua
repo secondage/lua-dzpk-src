@@ -38,9 +38,8 @@ function DownLoadLayerCtrller:startDownload(gamename, onResult, strZipUrl)
             onResult(4)
         elseif errorCode == 4 then
             onResult(5)
-           -- print("<---开始解压")
             bar:setPercent(100)
-            txtProgress:setString("正在解压")
+            txtProgress:setString("Decompress...")
         elseif errorCode == 5 then --服务器端未找到该游戏  “正在开发中，敬请期待”
             app.isDownloading = false
             onResult(6)
@@ -56,7 +55,7 @@ function DownLoadLayerCtrller:startDownload(gamename, onResult, strZipUrl)
         txtProgress:setString(progress)
 
         if percent == 100 then
-            txtProgress:setString("正在解压")
+            txtProgress:setString("Decompress...")
         end
 
         if startDownload and percent >= 0 then

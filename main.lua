@@ -8,18 +8,13 @@ cc.FileUtils:getInstance():addSearchPath("res/")
 cc.FileUtils:getInstance():addSearchPath("src/")
 cc.FileUtils:getInstance():addSearchPath("src/hall/res")
 cc.FileUtils:getInstance():addSearchPath("src/hall/src")
-
-cc.FileUtils:getInstance():addSearchPath("src/hall/res/hall")
 cc.FileUtils:getInstance():addSearchPath("src/hall/res/projui")
 
---cc.FileUtils:getInstance():addSearchPath("src/hall/res/hall")
---cc.FileUtils:getInstance():addSearchPath("src/hall/res/Mahj")
 
 cc.FileUtils:getInstance():addSearchPath(g_writablePath .."/update", true)
 cc.FileUtils:getInstance():addSearchPath(g_writablePath .."/update/hall/res", true)
 cc.FileUtils:getInstance():addSearchPath(g_writablePath .."/update/hall/src", true)
-cc.FileUtils:getInstance():addSearchPath(g_writablePath .."/update/hall/res/hall", true)
---cc.FileUtils:getInstance():addSearchPath(g_writablePath .."/update/hall/res/Mahj", true)
+cc.FileUtils:getInstance():addSearchPath(g_writablePath .."/update/hall/res/projui", true)
 
 require "config"
 require "cocos.init"
@@ -108,7 +103,7 @@ function __G__TRACKBACK__(msg)
 end
 
 local function main()
-	require("app.MyApp"):create({viewsRoot = "hall/src/app/views"}):enterScene("LoadingScene")
+	require("app.MyApp"):create({viewsRoot = "hall/src/app/views"}):enterScene("UpdateScene")
 end
 
 local status, msg = xpcall(main, __G__TRACKBACK__)
