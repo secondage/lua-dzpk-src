@@ -17,6 +17,7 @@ function LoginScene:onCreate()
 	self.eventProtocol = require("framework.components.behavior.EventProtocol").new()
 	cc.msgHandler:setPlayingScene(self)
 
+	self.resRoot = self:getResourceNode()
 	app.loginScene = self
 	--self.isautologin = false
 	cc.dataMgr.guestLogin = false
@@ -56,6 +57,41 @@ function LoginScene:onCreate()
 	btnLogin:addTouchEventListener(handler(self, LoginScene.onBtnLoginClick))
 	btnLogin:setPressedActionEnabled(true)
 	btnReg:setPressedActionEnabled(true)
+
+	local laySelectLogin = self.resRoot:getChildByName("Node_select_login_type"):show()
+	local btnGuest = laySelectLogin:getChildByName("Button_guest_login")
+	btnGuest:setPressedActionEnabled(true)
+	btnGuest:addTouchEventListener(function(obj, type)
+		if type == 2 then
+			app.audioPlayer:playClickBtnEffect()
+			--laySelectLogin:hide()
+			--self.nodeAccInfo:show()
+			app.holdOn.show("Waiting for login...")
+			self:reqGuestLogin()
+		end
+	end)
+
+	local btnAccount = laySelectLogin:getChildByName("Button_account_login")
+	btnAccount:setPressedActionEnabled(true)
+	btnAccount:addTouchEventListener(function(obj, type)
+		if type == 2 then
+			app.audioPlayer:playClickBtnEffect()
+			laySelectLogin:hide()
+			self.nodeAccInfo:show()
+		end
+	end)
+
+
+	
+	local btnBack = nodeAccInfo:getChildByName("Button_back_to_select_login")
+	btnBack:setPressedActionEnabled(true)
+	btnBack:addTouchEventListener(function(obj, type)
+		if type == 2 then
+			app.audioPlayer:playClickBtnEffect()
+			laySelectLogin:show()
+			self.nodeAccInfo:hide()
+		end
+	end)
 
 	--[[
 	local layType = self:getResourceNode():getChildByName("Panel_2")
@@ -127,6 +163,7 @@ function LoginScene:onCreate()
 	end)
 	
 	self.accountInput = accountInput
+	self.accountInput:hide()
 
 	local pwdInputTmp = nodeAccInfo:getChildByName("TextField_tfPwd"):hide()
 	--local pwdInputBg = nodeAccInfo:getChildByName("Image_pwdbg"):getChildByName("Image_3"):hide()
@@ -146,6 +183,7 @@ function LoginScene:onCreate()
 	end)
 	pwdInput:setInputFlag(0)
 	self.pwdInput = pwdInput
+	self.pwdInput:hide()
 
 	if self.username ~= "" and self.password ~= "" then
 	--	self.isautologin = true --屏蔽该句  == 屏幕自动登录
@@ -377,7 +415,8 @@ function LoginScene:onLOGIN_SRV_CONNECTED()
 	app.holdOn.hide()
 	print("<----1111111111onLOGIN_SRV_CONNECTED")
 
-	self.nodeAccInfo:show()
+	self.resRoot:getChildByName("Node_select_login_type"):show() 
+	self.nodeAccInfo:hide()
 
 	--[[local callfunc = cc.CallFunc:create(function()
 		print("<----auto")
