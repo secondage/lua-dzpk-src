@@ -7,7 +7,7 @@
 			<key>LoginScene/Btn_Accept.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,402},{236,58}}</string>
+				<string>{{1,421},{236,58}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -18,7 +18,7 @@
 			<key>LoginScene/Btn_Login.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{75,1},{278,68}}</string>
+				<string>{{402,1},{278,68}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -29,11 +29,11 @@
 			<key>LoginScene/Btn_Register.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{145,1},{278,68}}</string>
+				<string>{{1,281},{278,68}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{278,68}</string>
 			</dict>
@@ -44,9 +44,31 @@
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{399,72}</string>
+			</dict>
+			<key>LoginScene/fengleihao.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{281,75},{278,68}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{278,68}</string>
+			</dict>
+			<key>LoginScene/youkedenglu.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,351},{278,68}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{278,68}</string>
 			</dict>
 		</dict>
 		<key>metadata</key>
@@ -58,12 +80,12 @@
 			<key>realTextureFileName</key>
 			<string>LoginSceneTexture.png</string>
 			<key>size</key>
-			<string>{256,512}</string>
+			<string>{512,512}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
-			<integer>256</integer>
+			<integer>512</integer>
 			<key>height</key>
 			<integer>512</integer>
 		</dict>
