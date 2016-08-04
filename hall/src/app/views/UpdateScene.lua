@@ -37,7 +37,9 @@ function UpdateScene:onCreate()
             txtPercent:setString("Decompress...")
             
         else
-            txtPercent:setString("Error...")
+            --txtPercent:setString("Error...")
+            assetsManager:release()
+            require("app.MyApp"):create({viewsRoot = "hall/src/app/views"}):enterScene("LoadingScene")
         end
     end
 
